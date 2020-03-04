@@ -6,6 +6,7 @@ import 'roboto-fontface/css/roboto/roboto-fontface.css'
 import '@mdi/font/css/materialdesignicons.css'
 require("./assets/main.scss");
 
+import Home from "./components/Home.vue";
 import Cast from "./components/Cast.vue";
 import Films from "./components/Films.vue";
 
@@ -14,8 +15,9 @@ Vue.use(VueRouter)
 const router = new VueRouter({
   mode: "history",
   routes: [
-      { path: "/cast", component: Cast },
-      { path: "/films", component: Films }
+    { path: "/", component: Home },
+    { path: "/cast", component: Cast },
+    { path: "/films", component: Films }
   ]
 });
 

@@ -1,31 +1,32 @@
 <template>
 <v-app>
-    <v-content>
+    <div class="has-background-white-bis">
       <section class="hero is-warning">
         <div class="hero-body">
-      <b-navbar>
-        <template slot="brand">
-            <b-navbar-item tag="router-link" :to="{ path: '/' }">
-                <img
-                    src="./assets/blou.png" style="width: 50%; max-height: none;"
-                >
-            </b-navbar-item>
-        </template>
-        <template slot="start" >
-            <b-navbar-item href='/films'>
-                Films
-            </b-navbar-item>
-            <b-navbar-item href="/cast">
-                Cast
-            </b-navbar-item>
-        </template>
-    </b-navbar>
+          <b-navbar>
+            <template slot="brand">
+                <b-navbar-item tag="router-link" :to="{ path: '/' }">
+                    <img
+                        src="./assets/blou.png" style="width: 50%; max-height: none;"
+                    >
+                </b-navbar-item>
+            </template>
+            <template slot="start" >
+                <b-navbar-item href='/films'>
+                    Films
+                </b-navbar-item>
+                <b-navbar-item href="/cast">
+                    Cast
+                </b-navbar-item>
+            </template>
+          </b-navbar>
         </div>
       </section>
-      <router-view>
+      <router-view >
         <!-- Route content goes here. -->
       </router-view>
-    </v-content>
+      <footer class="footer has-background-warning"></footer>
+    </div>
   </v-app>
 </template>
 

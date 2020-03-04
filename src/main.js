@@ -1,7 +1,8 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router';
 import App from './App.vue'
-import buefy from './plugins/buefy';
+import Buefy from 'buefy'
+import 'buefy/dist/buefy.css'
 import 'roboto-fontface/css/roboto/roboto-fontface.css'
 import '@mdi/font/css/materialdesignicons.css'
 require("./assets/main.scss");
@@ -9,6 +10,7 @@ require("./assets/main.scss");
 import Home from "./components/Home.vue";
 import Cast from "./components/Cast.vue";
 import Films from "./components/Films.vue";
+Vue.use(Buefy)
 
 Vue.use(VueRouter)
 
@@ -24,7 +26,6 @@ const router = new VueRouter({
 Vue.config.productionTip = false
 
 new Vue({
-  buefy,
   router,
   render: h => h(App)
 }).$mount('#app')

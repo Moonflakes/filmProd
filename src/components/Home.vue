@@ -3,7 +3,7 @@
         <div class="columns">
             <div class="column">
                 <div class="card">
-                    <div class="card-content" @click="formFilm">
+                    <div class="card-content" @click="formFilm()">
                         <h1 class="title is-5">Ajouter un projet</h1>
                         <h2 class="title is-2">+</h2>
                     </div>
@@ -11,7 +11,7 @@
             </div>
             <div class="column">
                <div class="card">
-                    <div class="card-content" @click="formFilm">
+                    <div class="card-content" @click="formFilm()">
                         <h1 class="title is-5">Ajouter un projet</h1>
                         <h2 class="title is-2">+</h2>
                     </div>
@@ -19,7 +19,7 @@
             </div>
             <div class="column">
                 <div class="card">
-                    <div class="card-content" @click="formFilm">
+                    <div class="card-content" @click="formFilm()">
                         <h1 class="title is-5">Ajouter un projet</h1>
                         <h2 class="title is-2">+</h2>
                     </div>
@@ -27,7 +27,7 @@
             </div>
             <div class="column">
                 <div class="card">
-                    <div class="card-content" @click="formFilm">
+                    <div class="card-content" @click="formFilm()">
                         <h1 class="title is-5">Ajouter un projet</h1>
                         <h2 class="title is-2">+</h2>
                     </div>
@@ -39,9 +39,54 @@
 
 <script>
 // import { mdiPlusThick } from '@mdi/js';
-const ModalForm = {
-        props: ['email', 'password'],
-        template: `
+// const ModalForm = {
+//         props: ['email', 'password'],
+//         template: `
+//             <form action="">
+//                 <div class="modal-card" style="width: auto">
+//                     <header class="modal-card-head">
+//                         <p class="modal-card-title">Login</p>
+//                     </header>
+//                     <section class="modal-card-body">
+//                         <b-field label="Email">
+//                             <b-input
+//                                 type="email"
+//                                 :value="email"
+//                                 placeholder="Your email"
+//                                 required>
+//                             </b-input>
+//                         </b-field>
+
+//                         <b-field label="Password">
+//                             <b-input
+//                                 type="password"
+//                                 :value="password"
+//                                 password-reveal
+//                                 placeholder="Your password"
+//                                 required>
+//                             </b-input>
+//                         </b-field>
+
+//                         <b-checkbox>Remember me</b-checkbox>
+//                     </section>
+//                     <footer class="modal-card-foot">
+//                         <button class="button" type="button" @click="$parent.close()">Close</button>
+//                         <button class="button is-primary">Login</button>
+//                     </footer>
+//                 </div>
+//             </form>
+//         `
+//     }
+export default {
+    
+        methods: {
+            clickMe() {
+                this.$buefy.notification.open('Clicked!!')
+            },
+
+            formFilm() {
+                this.$buefy.modal.open(
+                    `
             <form action="">
                 <div class="modal-card" style="width: auto">
                     <header class="modal-card-head">
@@ -76,22 +121,7 @@ const ModalForm = {
                 </div>
             </form>
         `
-    }
-export default {
-    
-        methods: {
-            clickMe() {
-                this.$buefy.notification.open('Clicked!!')
-            },
-
-            formFilm() {
-                this.$buefy.modal.open({
-                    parent: this,
-                    component: ModalForm,
-                    hasModalCard: true,
-                    customClass: 'custom-class custom-class-2',
-                    trapFocus: true
-                })
+                )
             }
         }
     };

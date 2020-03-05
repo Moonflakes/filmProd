@@ -7,9 +7,9 @@ import 'roboto-fontface/css/roboto/roboto-fontface.css'
 import '@mdi/font/css/materialdesignicons.css'
 require("./assets/main.scss");
 
-import Home from "./components/Home.vue";
-import Cast from "./components/Cast.vue";
-import Films from "./components/Films.vue";
+import Home from "./pages/Home.vue";
+import Cast from "./pages/Cast.vue";
+import Films from "./pages/Films.vue";
 Vue.use(Buefy)
 
 Vue.use(VueRouter)

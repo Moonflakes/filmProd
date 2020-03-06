@@ -60,7 +60,7 @@
                     <h1 class="title">Casting</h1>
                     <b-button
                             icon-left="plus"
-                            type="is-primary"
+                            class="is-primary"
                             @click="addCast" />
                     <section v-for="(cast, index) in casts" :key="cast.id">
                         <div class="cast">
@@ -68,12 +68,20 @@
                             <b-field grouped>
                                 <b-field label="Name"
                                     :label-position='labelPosition'>
-                                    <b-input
-                                        v-model="cast.name"
-                                        :value="name"
+                                    <b-autocomplete
+                                        v-model="castName"
+                                        ref="autocomplete"
+                                        :data="filteredCastsNamesArray"
                                         placeholder="Name"
+                                        @select="option => selected = option"
                                         required>
-                                    </b-input>
+                                        <template slot="footer">
+                                            <a @click="showAddName">
+                                                <span> Add new... </span>
+                                            </a>
+                                        </template>
+                                        <template slot="empty">No results for {{castName}}</template>
+                                    </b-autocomplete>
                                 </b-field>
                                 <b-field label="Age"
                                     :label-position='labelPosition'>
@@ -95,7 +103,7 @@
                                 </b-field>
                                 <b-button
                                     icon-left="minus"
-                                    type="is-primary"
+                                    class="is-primary"
                                     @click="deleteCast(index)" />
                             </b-field>
                         </div>
@@ -103,20 +111,15 @@
                 </section>
 
                 <hr>
-                <!-- <b-pagination
-                    :total="total"
-                    :current.sync="current"
-                    :simple="isSimple"
-                    :per-page="perPage"
-                    :icon-prev="prevIcon"
-                    :icon-next="nextIcon">
-                </b-pagination> -->
-                <button
+                <button v-if="show"
+                    class="button is-primary is-right"
+                    @click="show = !show">Next</button>
+                <button v-else
                     class="button is-primary"
-                    @click="show = !show">OK</button>
+                    @click="show = !show">Before</button>
                 
             </section>
-            <footer class="modal-card-foot">
+            <footer class="modal-card-foot" v-if="!show">
                 <button class="button" type="button" @click="$parent.close()">Close</button>
                 <button class="button is-primary">Add</button>
             </footer>
@@ -138,17 +141,19 @@
                     }
                 ],
                 show: true,
-                // total: 2,
-                // current: 1,
-                // perPage: 1,
-                // isSimple: true,
-                // prevIcon: 'chevron-left',
-                // nextIcon: 'chevron-right'
+                castsNames: [
+                    'Philippe Catherine',
+                    'Adele Miroux',
+                    'Julien Buderon'
+                ],
+                castName: ''
             }
         },
         props: ['email', 'password'],
+
         methods: {
             addCast() {
+                console.log("actors", this.actors)
                 this.casts.push({
                     name: '',
                     age: '',
@@ -158,6 +163,37 @@
 
             deleteCast(index) {
                 this.casts.splice(index, 1)
+            },
+
+            showAddName() {
+                this.$buefy.dialog.prompt({
+                    message: `Fruit`,
+                    inputAttrs: {
+                        placeholder: 'e.g. Pierre Pierre',
+                        maxlength: 20,
+                        value: this.castName
+                    },
+                    confirmText: 'Add',
+                    onConfirm: (value) => {
+                        this.castsNames.push(value)
+                        this.$refs.autocomplete.setSelected(value)
+                    }
+                })
+            }
+        },
+
+        computed: {
+            actors() {
+                return this.$store.state.actors;
+            },
+            
+            filteredCastsNamesArray() {
+                return this.castsNames.filter((option) => {
+                    return option
+                        .toString()
+                        .toLowerCase()
+                        .indexOf(this.castName.toLowerCase()) >= 0
+                })
             }
         }
 

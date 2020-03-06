@@ -45,6 +45,8 @@
 
 <script>
 import ModalForm from '../components/ModalForm'
+// import Actors from '../assets/actors.json'
+
 export default {
     
     data() {
@@ -58,17 +60,10 @@ export default {
             }
             },
         methods: {
-            clickMe() {
-                this.$buefy.notification.open('Clicked!!')
-            },
-
             formFilm() {
                 this.$buefy.modal.open({
                     parent: this,
-                    component: ModalForm,
-                    // hasModalCard: true,
-                    // customClass: 'custom-class custom-class-2',
-                    // trapFocus: true
+                    component: ModalForm
                 })
             }
         }

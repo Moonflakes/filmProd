@@ -129,6 +129,8 @@
 </template>
 
 <script>
+    import { mapGetters } from 'vuex';
+
     export default {
         data() {
             return {
@@ -183,10 +185,10 @@
         },
 
         computed: {
-            actors() {
-                return this.$store.state.actors;
-            },
-            
+            ...mapGetters({
+                actors: 'actorsNames'
+            }),
+
             filteredCastsNamesArray() {
                 return this.castsNames.filter((option) => {
                     return option

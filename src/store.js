@@ -8,6 +8,7 @@ export const store = new Vuex.Store({
         films: [],
         actors: [
             {
+                "id":0,
                "name":"Victoria Hu",
                "age":21,
                "films":[
@@ -24,6 +25,7 @@ export const store = new Vuex.Store({
                ]
             },
             {
+                "id":1,
                "name":"Pierre Lino",
                "age":43,
                "films":[
@@ -35,6 +37,7 @@ export const store = new Vuex.Store({
                ]
             },
             {
+                "id":2,
                "name":"Marc Lemoine",
                "age":15,
                "films":[
@@ -51,6 +54,7 @@ export const store = new Vuex.Store({
                ]
             },
             {
+                "id":3,
                "name":"Valérie Biloupa",
                "age":78,
                "films":[
@@ -62,6 +66,7 @@ export const store = new Vuex.Store({
                ]
             },
             {
+                "id":4,
                "name":"Victor Jouillot",
                "age":33,
                "films":[
@@ -78,6 +83,7 @@ export const store = new Vuex.Store({
                ]
             },
             {
+                "id":5,
                "name":"Helene Halmina",
                "age":42,
                "films":[
@@ -89,6 +95,7 @@ export const store = new Vuex.Store({
                ]
             },
             {
+                "id":6,
                "name":"Robert Li",
                "age":20,
                "films":[
@@ -100,6 +107,7 @@ export const store = new Vuex.Store({
                ]
             },
             {
+                "id":7,
                "name":"Patrick Louma",
                "age":65,
                "films":[
@@ -111,6 +119,7 @@ export const store = new Vuex.Store({
                ]
             },
             {
+                "id":8,
                "name":"Lamia Ponchoux",
                "age":12,
                "films":[
@@ -127,6 +136,7 @@ export const store = new Vuex.Store({
                ]
             },
             {
+                "id":9,
                "name":"Jerome Niel",
                "age":35,
                "films":[
@@ -138,5 +148,15 @@ export const store = new Vuex.Store({
                ]
             }
          ]
+    },
+    getters: {
+        actorsNames(state) {
+            return state.actors.map(actor => actor.name)
+        }
+    },
+    mutation: {
+        addActor (state, actor) {
+            state.actors.push(actor);
+        }
     }
 })

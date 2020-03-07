@@ -23,7 +23,8 @@ export const store = new Vuex.Store({
             {
                "id":0,
                "avatar": "https://api.adorable.io/avatars/104/UIwBA@adorable.io.png",
-               "name":"Victoria Hu",
+               "firstName":"Victoria",
+               "lastName": "Hu",
                "age":21,
                "films":[
                   {
@@ -41,7 +42,8 @@ export const store = new Vuex.Store({
             {
                "id":1,
                "avatar": "https://api.adorable.io/avatars/104/e6RNF@adorable.io.png",
-               "name":"Pierre Lino",
+               "firstName":"Pierre",
+               "lastName": "Lino",
                "age":43,
                "films":[
                   {
@@ -54,7 +56,8 @@ export const store = new Vuex.Store({
             {
                "id":2,
                "avatar": "https://api.adorable.io/avatars/104/fKYv6@adorable.io.png",
-               "name":"Marc Lemoine",
+               "firstName":"Marc",
+               "lastName": "Lemoine",
                "age":15,
                "films":[
                   {
@@ -72,7 +75,8 @@ export const store = new Vuex.Store({
             {
                "id":3,
                "avatar": "https://api.adorable.io/avatars/104/eXcf8@adorable.io.png",
-               "name":"Valérie Biloupa",
+               "firstName":"Valérie",
+               "lastName": "Biloupa",
                "age":78,
                "films":[
                   {
@@ -85,7 +89,8 @@ export const store = new Vuex.Store({
             {
                "id":4,
                "avatar": "https://api.adorable.io/avatars/104/Z2iMT@adorable.io.png",
-               "name":"Victor Jouillot",
+               "firstName":"Victor",
+               "lastName": "Jouillot",
                "age":33,
                "films":[
                   {
@@ -103,7 +108,8 @@ export const store = new Vuex.Store({
             {
                "id":5,
                "avatar": "https://api.adorable.io/avatars/104/iicuu@adorable.io.png",
-               "name":"Helene Halmina",
+               "firstName":"Helene",
+               "lastName": "Halmina",
                "age":42,
                "films":[
                   {
@@ -116,7 +122,8 @@ export const store = new Vuex.Store({
             {
                "id":6,
                "avatar": "https://api.adorable.io/avatars/104/zR7rX@adorable.io.png",
-               "name":"Robert Li",
+               "firstName":"Robert",
+               "lastName": "Li",
                "age":20,
                "films":[
                   {
@@ -129,7 +136,8 @@ export const store = new Vuex.Store({
             {
                "id":7,
                "avatar": "https://api.adorable.io/avatars/104/ptEU5@adorable.io.png",
-               "name":"Patrick Louma",
+               "firstName":"Patrick",
+               "lastName": "Louma",
                "age":65,
                "films":[
                   {
@@ -142,7 +150,8 @@ export const store = new Vuex.Store({
             {
                "id":8,
                "avatar": "https://api.adorable.io/avatars/104/V6EpO@adorable.io.png",
-               "name":"Lamia Ponchoux",
+               "firstName":"Lamia",
+               "lastName": "Ponchoux",
                "age":12,
                "films":[
                   {
@@ -160,7 +169,8 @@ export const store = new Vuex.Store({
             {
                "id":9,
                "avatar": "https://api.adorable.io/avatars/104/C4HVO@adorable.io.png",
-               "name":"Jerome Niel",
+               "firstName":"Jerome",
+               "lastName": "Niel",
                "age":35,
                "films":[
                   {
@@ -173,12 +183,15 @@ export const store = new Vuex.Store({
          ]
     },
     getters: {
-         actorsNames(state) {
-            return state.actors.map(actor => actor.name)
+         actorsFirstNames(state) {
+            return state.actors.map(actor => actor.firstName)
          },
          actorsFilms(state) {
             // console.log(state.actors.map(actor => actor.films))
             return state.actors.map(actor => actor.films)
+         },
+         filmsTitles(state) {
+            return state.films.map(film => film.title)
          }
     },
     mutations: {

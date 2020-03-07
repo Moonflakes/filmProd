@@ -1,10 +1,23 @@
 <template>
     <section class="section">
-        <b-field grouped group-multiline>
-            <b-select v-model="defaultSortDirection">
-                <option value="asc">Default sort direction: ASC</option>
-                <option value="desc">Default sort direction: DESC</option>
+        <b-field grouped group-multiline class="filters is-8">
+            <b-select v-model="sort" expanded>
+                <option value="default">Default sort</option>
+                <option value="firstName">Sort by fisrt name ascendent</option>
+                <option value="lastName">Sort by last name ascendent</option>
+                <option value="age">Sort by last age ascendent</option>
             </b-select>
+            <b-field horizontal expanded label="Find a film">
+            <b-autocomplete
+                v-model="filmTitle"
+                placeholder="e.g. Title of the film"
+                :keep-first="true"
+                :open-on-focus="true"
+                :data="films"
+                @select="option => selected = option"
+                @change="filteredActors">
+            </b-autocomplete>
+        </b-field>
         </b-field>
         <div class="columns is-multiline">
             <div class="column" v-for="cast in casts" :key="cast.id">
@@ -18,7 +31,7 @@
                     <div class="media-content">
                         <div class="content">
                             <p>
-                                <strong>{{cast.name}}</strong> 
+                                <strong>{{cast.firstName+' '+cast.lastName}}</strong> 
                             <br>
                                 {{cast.age}} ans                                 
                             <br>
@@ -37,12 +50,12 @@
     </section>
 </template>
 <script>
-// import { mapGetters } from 'vuex';
+import { mapGetters } from 'vuex';
 
 export default {
     data() {
             return {
-                defaultSortDirection: 'asc',
+                sort: 'default',
                 columns: [
                     {
                         field: 'title',
@@ -57,11 +70,15 @@ export default {
                         field: 'role',
                         label: 'Role',
                     }
-                ]
+                ],
+                filmTitle: ''
             }
     },
 
     methods: {
+        filteredActors() {
+
+        }
         // avatarMaker() {
         //     let result           = '';
         //     let characters       = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
@@ -78,8 +95,25 @@ export default {
 
     computed: {
         casts() {
-            return this.$store.state.actors
-        }
+            let actors = this.$store.state.actors;
+            let filteredActors = actors;
+
+            if (this.filmTitle) {
+                filteredActors = actors.filter(actor => actor.films.find(film => film.title == this.filmTitle))
+            }
+            if (this.sort != 'default') 
+                filteredActors = filteredActors.sort(function(a, b) {
+                    if (a[this.sort] < b[this.sort])
+                        return -1;
+                    if (b[this.sort] < a[this.sort])
+                        return 1;
+                    return 0;
+                }.bind(this));
+            return filteredActors
+        },
+        ...mapGetters({
+            films: 'filmsTitles'
+        }),
     }
 };
 </script>
@@ -92,5 +126,9 @@ export default {
         padding-top: 3rem;
         padding-right: 10rem;
         padding-left: 10rem;
+    }
+    .filters{
+        align-items: center;
+        margin-bottom: 20px !important;
     }
 </style>

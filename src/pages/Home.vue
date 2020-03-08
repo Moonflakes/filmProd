@@ -1,6 +1,6 @@
 <template>
-    <section class="section">
-        <div class="columns">
+    <section class="section body-section">
+        <div class="columns is-multiline">
             <div class="column">
                 <div class="card">
                     <div class="card-content" @click="isComponentModalActive  = true">
@@ -15,27 +15,11 @@
                     </b-modal>
                 </div>
             </div>
-            <div class="column">
-               <div class="card">
-                    <div class="card-content" @click="formFilm()">
-                        <h1 class="title is-5">Ajouter un projet</h1>
-                        <h2 class="title is-2">+</h2>
-                    </div>
-                </div>
-            </div>
-            <div class="column">
-                <div class="card">
-                    <div class="card-content" @click="formFilm()">
-                        <h1 class="title is-5">Ajouter un projet</h1>
-                        <h2 class="title is-2">+</h2>
-                    </div>
-                </div>
-            </div>
-            <div class="column">
-                <div class="card">
-                    <div class="card-content" @click="formFilm()">
-                        <h1 class="title is-5">Ajouter un projet</h1>
-                        <h2 class="title is-2">+</h2>
+            <div class="column" v-for="film in films" :key="film.id">
+               <div class="card project">
+                    <div class="card-content" href='/films'>
+                        <h1 class="title is-5">{{film.title}}</h1>
+                        <h3 class="subtitle is-6"><i>{{film.status}}</i></h3>
                     </div>
                 </div>
             </div>
@@ -50,23 +34,30 @@ import ModalForm from '../components/ModalForm'
 export default {
     
     data() {
-            return {
-                ModalForm,
-                formProps: {
-                    email: 'evan@you.com',
-                    password: 'testing'
-                },
-                isComponentModalActive: false,
-            }
+        return {
+            ModalForm,
+            formProps: {
+                email: 'evan@you.com',
+                password: 'testing'
             },
-        methods: {
-            formFilm() {
-                this.$buefy.modal.open({
-                    parent: this,
-                    component: ModalForm
-                })
-            }
+            isComponentModalActive: false,
         }
+    },
+    
+    methods: {
+        formFilm() {
+            this.$buefy.modal.open({
+                parent: this,
+                component: ModalForm
+            })
+        }
+    },
+
+    computed: {
+        films() {
+            return this.$store.state.films
+        }
+    }
     };
 </script>
 <style scoped>
@@ -76,11 +67,12 @@ export default {
     .card {
         border-radius: 15px;
         cursor: pointer;
+        height: 100%;
     }
     :hover.card {
-        background-color: rgba(44, 32, 81, 0.623);
+        background-color: #79738F;
     }
-    :hover.card h1, :hover.card h2{
+    :hover.card h1, :hover.card h2, :hover.card h3{
         color: white;
     }
     .section {
@@ -90,5 +82,11 @@ export default {
     }
     h2 {
         text-align: center;
+    }
+    .project {
+        background-color:	rgb(255, 143, 121);
+    }
+    .body-section {
+        height: 64%;
     }
 </style>

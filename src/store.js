@@ -8,15 +8,24 @@ export const store = new Vuex.Store({
         films: [ 
             {
                "title":"Ronron petit patapon",
-               "date":"12/03/1995"
+               "date":"12/03/1995",
+               "synopsis":"blabla",
+               "status":"in progress",
+               "budjet":150000
             },
             {
                "title":"Ratata chez les Toupoutoux",
-               "date":"12/03/1995"
+               "date":"12/03/1995",
+               "synopsis":"blabla",
+               "status":"in progress",
+               "budjet":150000
             },
             {
                "title":"Les billes perdues",
-               "date":"12/03/1995"
+               "date":"12/03/1995",
+               "synopsis":"blabla",
+               "status":"in progress",
+               "budjet":150000
             }
          ],
         actors: [

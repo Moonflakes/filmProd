@@ -90,6 +90,8 @@ export default {
     width: 155px;
   }
   .body-section {
+    position: fixed;
+    width: inherit;
     padding-bottom: 0px;
     background-color: whitesmoke;
     transition: 1s;
@@ -115,10 +117,5 @@ export default {
   .hero-body {
     padding-bottom: 9rem !important;
     padding-top: 9rem !important;
-  }
-  
-  .page {
-    position: fixed;
-    width: inherit;
   }
 </style>

@@ -36,15 +36,17 @@
           </div>
         </div>
       </section>
-      <router-view >
-      </router-view>
+      <transition name="router-anime" 
+          enter-active-class="animated fadeInDown" 
+          leave-active-class="animated fadeOutDown">
+        <router-view/>
+      </transition>
       <footer class="footer has-background-warning"></footer>
     </div>
   </v-app>
 </template>
 
 <script>
-
 export default {
   name: 'App',
 
@@ -64,6 +66,8 @@ export default {
 };
 </script>
 <style>
+  @import "https://cdn.jsdelivr.net/npm/animate.css@3.5.1";
+
   .content-nav {
     width: 100%;
     display: flex;
@@ -88,6 +92,7 @@ export default {
   .body-section {
     padding-bottom: 0px;
     background-color: whitesmoke;
+    transition: 1s;
   }
   .section {
     padding: 3rem 3rem !important;
@@ -112,4 +117,8 @@ export default {
     padding-top: 9rem !important;
   }
   
+  .page {
+    position: fixed;
+    width: inherit;
+  }
 </style>

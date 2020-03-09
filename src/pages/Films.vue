@@ -1,7 +1,7 @@
 <template>
   <section class="section body-section">
         <div class="columns is-multiline">
-            <div class="column is-full" v-for="film in films" :key="film.id">
+            <router-link :to="{name: 'film', params: {id: film.id}}" class="column is-full" v-for="film in films" :key="film.id" @click="clickColumn(film.id)">
                 <div class="box">
                 <article class="media">
                     <div class="media-left">
@@ -25,7 +25,7 @@
                     </div>
                 </article>
                 </div>
-            </div>
+            </router-link>
         </div>
     </section>
 </template>
@@ -33,7 +33,9 @@
 <script>
 export default {
         methods: {
-            
+            clickColumn(a) {
+                console.log(a)
+            }
         },
         computed: {
             films() {
@@ -59,3 +61,10 @@ export default {
         }
     };
 </script>
+<style scoped>
+    :hover.column {
+        transform: scale(1.025);
+        transition: .2s ease-in;
+        cursor: pointer;
+    }
+</style>

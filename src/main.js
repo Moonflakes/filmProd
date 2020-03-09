@@ -11,6 +11,7 @@ require("./assets/main.scss");
 import Home from "./pages/Home.vue";
 import Cast from "./pages/Cast.vue";
 import Films from "./pages/Films.vue";
+import FilmItem from "./pages/FilmItem.vue";
 Vue.use(Buefy)
 
 Vue.use(VueRouter)
@@ -20,7 +21,9 @@ const router = new VueRouter({
   routes: [
     { path: "/", component: Home },
     { path: "/cast", component: Cast },
-    { path: "/films", component: Films }
+    { path: "/films", component: Films },
+    { path: "/film/:id(\\d+)", component: FilmItem, name: 'film' },
+    // { path: "/actor/:id(\\d+)", component: Films }
   ]
 });
 

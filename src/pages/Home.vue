@@ -1,31 +1,30 @@
 <template>
     <section class="section body-section">
         <div class="is-flex home-columns">
-                <div class="card">
-                    <div class="card-content add-project" @click="isComponentModalActive = true">
-                        <h2 class="title is-2">+</h2>
-                        <h1 class="title is-6">Ajouter un projet</h1>
-                    </div>
-                    <b-modal
-                        :active.sync="isComponentModalActive"
-                        :component="ModalForm"
-                        :props="formProps"
-                        :width="700">
-                    </b-modal>
+            <div class="card">
+                <div class="card-content add-project" @click="isComponentModalActive = true">
+                    <h2 class="title is-2">+</h2>
+                    <h1 class="title is-6">Ajouter un projet</h1>
                 </div>
-               <div class="card project" v-for="film in films" :key="film.id">
-                    <div class="card-content" href='/films'>
-                        <h1 class="title is-5">{{film.title}}</h1>
-                        <h3 class="subtitle is-6"><i>{{film.status}}</i></h3>
-                    </div>
+                <b-modal
+                    :active.sync="isComponentModalActive"
+                    :component="ModalForm"
+                    :props="formProps"
+                    :width="700">
+                </b-modal>
+            </div>
+            <div class="card project" v-for="film in films" :key="film.id">
+                <div class="card-content" href='/films'>
+                    <h1 class="title is-5">{{film.title}}</h1>
+                    <h3 class="subtitle is-6"><i>{{film.status}}</i></h3>
                 </div>
+            </div>
         </div>
     </section>
 </template>
 
 <script>
 import ModalForm from '../components/ModalForm'
-// import Actors from '../assets/actors.json'
 
 export default {
     

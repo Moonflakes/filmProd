@@ -53,7 +53,6 @@ export default {
   }),
   computed: {
     hiddenContainer() {
-      console.log(this.$route.path)
       if (this.$route.path != '/')
         return false
       return true
@@ -84,5 +83,8 @@ export default {
     height: 100%;
     padding-bottom: 0px;
     background-color: whitesmoke;
+  }
+  .section {
+    padding: 3rem 10rem !important;
   }
 </style>

@@ -9,21 +9,21 @@ export const store = new Vuex.Store({
             {
                "title":"Ronron petit patapon",
                "date":"12/03/1995",
-               "synopsis":"blabla",
+               "synopsis":"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer purus mi, egestas non neque a, iaculis posuere augue. Nulla blandit augue ex, non suscipit dolor ultrices pretium. Etiam odio erat, varius eu nulla id, lacinia varius tellus. Vivamus sodales et nunc eget accumsan. Cras venenatis ut massa vitae facilisis. Sed a molestie est, lacinia sagittis nisl. Integer convallis lectus a nisi lacinia aliquet. Proin augue mauris, fermentum ut enim et, dictum tristique lorem. Suspendisse tincidunt ante et nisi commodo fringilla in ac augue. Pellentesque ultrices fringilla mi quis tempor. Integer a commodo nisi. Duis varius ultrices hendrerit. Etiam pellentesque congue imperdiet. Aenean ut odio dignissim, imperdiet lacus id, pretium odio.",
                "status":"in progress",
                "budjet":150000
             },
             {
                "title":"Ratata chez les Toupoutoux",
                "date":"12/03/1995",
-               "synopsis":"blabla",
+               "synopsis":"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer purus mi, egestas non neque a, iaculis posuere augue. Nulla blandit augue ex, non suscipit dolor ultrices pretium. Etiam odio erat, varius eu nulla id, lacinia varius tellus. Vivamus sodales et nunc eget accumsan. Cras venenatis ut massa vitae facilisis. Sed a molestie est, lacinia sagittis nisl. Integer convallis lectus a nisi lacinia aliquet. Proin augue mauris, fermentum ut enim et, dictum tristique lorem. Suspendisse tincidunt ante et nisi commodo fringilla in ac augue. Pellentesque ultrices fringilla mi quis tempor. Integer a commodo nisi. Duis varius ultrices hendrerit. Etiam pellentesque congue imperdiet. Aenean ut odio dignissim, imperdiet lacus id, pretium odio.",
                "status":"in progress",
                "budjet":150000
             },
             {
                "title":"Les billes perdues",
                "date":"12/03/1995",
-               "synopsis":"blabla",
+               "synopsis":"Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer purus mi, egestas non neque a, iaculis posuere augue. Nulla blandit augue ex, non suscipit dolor ultrices pretium. Etiam odio erat, varius eu nulla id, lacinia varius tellus. Vivamus sodales et nunc eget accumsan. Cras venenatis ut massa vitae facilisis. Sed a molestie est, lacinia sagittis nisl. Integer convallis lectus a nisi lacinia aliquet. Proin augue mauris, fermentum ut enim et, dictum tristique lorem. Suspendisse tincidunt ante et nisi commodo fringilla in ac augue. Pellentesque ultrices fringilla mi quis tempor. Integer a commodo nisi. Duis varius ultrices hendrerit. Etiam pellentesque congue imperdiet. Aenean ut odio dignissim, imperdiet lacus id, pretium odio.",
                "status":"in progress",
                "budjet":150000
             }

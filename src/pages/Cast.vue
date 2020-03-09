@@ -1,5 +1,5 @@
 <template>
-    <section class="section">
+    <section class="section body-section">
         <b-field grouped group-multiline class="filters is-8">
             <b-select v-model="sort" expanded>
                 <option value="default">Default sort</option>
@@ -45,7 +45,6 @@
                 </article>
                 </div>
             </div>
-           
         </div>
     </section>
 </template>
@@ -76,21 +75,6 @@ export default {
     },
 
     methods: {
-        filteredActors() {
-
-        }
-        // avatarMaker() {
-        //     let result           = '';
-        //     let characters       = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-        //     let charactersLength = characters.length;
-        //     for ( var i = 0; i < 5; i++ ) {
-        //         result += characters.charAt(Math.floor(Math.random() * charactersLength));
-        //     }
-
-        //     this.$store.commit('addAvatar', "https://api.adorable.io/avatars/104/"+result+"@adorable.io.png")
-        //     console.log(result)
-        //     // return "https://api.adorable.io/avatars/104/"+result+"@adorable.io.png"
-        // }
     },
 
     computed: {
@@ -121,11 +105,6 @@ export default {
     .card {
         border-radius: 15px;
         cursor: pointer;
-    }
-    .section {
-        padding-top: 3rem;
-        padding-right: 10rem;
-        padding-left: 10rem;
     }
     .filters{
         align-items: center;

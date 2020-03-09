@@ -1,12 +1,12 @@
 <template>
 <v-app>
-    <div class="has-background-white-bis is-marginless">
+    <div class="content-body">
       <section class="hero is-warning is-medium">
         <div class="hero-head">
           <nav class="navbar">
             <div class="content-nav">
               <div class="navbar-brand">
-                <a class="navbar-item" tag="router-link" :to="{ path: '/' }">
+                <a class="navbar-item" href='/'>
             <!-- <template slot="brand">
                 <b-navbar-item > -->
                     <img
@@ -81,6 +81,9 @@ export default {
     display: flex;
     padding: 15px 15px 0px 15px;
   }
+  .content-body{
+    height: 100%;
+  }
   .navbar-burger {
     position: absolute !important;
     right: 20px;
@@ -90,11 +93,5 @@ export default {
   }
   .navbar .has-shadow {
     box-shadow: 0 0.125rem 0.25rem rgba(0,0,0,.075) !important;
-  }
-  .columns {
-    height: 280px;
-    position: absolute;
-    top: 218px;
-    padding-right: 160px;
   }
 </style>

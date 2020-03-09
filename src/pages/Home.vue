@@ -1,7 +1,6 @@
 <template>
     <section class="section body-section">
-        <div class="columns is-multiline">
-            <div class="column">
+        <div class="is-flex home-columns">
                 <div class="card">
                     <div class="card-content" @click="isComponentModalActive  = true">
                         <h1 class="title is-5">Ajouter un projet</h1>
@@ -14,15 +13,12 @@
                         :width="700">
                     </b-modal>
                 </div>
-            </div>
-            <div class="column" v-for="film in films" :key="film.id">
-               <div class="card project">
+               <div class="card project" v-for="film in films" :key="film.id">
                     <div class="card-content" href='/films'>
                         <h1 class="title is-5">{{film.title}}</h1>
                         <h3 class="subtitle is-6"><i>{{film.status}}</i></h3>
                     </div>
                 </div>
-            </div>
         </div>
     </section>
 </template>
@@ -68,6 +64,9 @@ export default {
         border-radius: 15px;
         cursor: pointer;
         height: 100%;
+        margin-left: 2%;
+        margin-bottom: 2%;
+        flex-basis: 15rem;
     }
     :hover.card {
         background-color: #79738F;
@@ -87,6 +86,19 @@ export default {
         background-color:	rgb(255, 143, 121);
     }
     .body-section {
-        height: 64%;
+        height: 100%;
+        padding-bottom: 0px;
+        background-color: whitesmoke;
+    }
+    .home-columns {
+        width: 100%;
+        height: 280px;
+        position: absolute;
+        top: 218px;
+        left: 0;
+        padding-left: 10%;
+        padding-right: 10%;
+        flex-wrap: wrap;
+        justify-content: flex-start;
     }
 </style>

@@ -1,7 +1,7 @@
 <template>
   <section class="section body-section">
         <div class="columns is-multiline">
-            <div class="column" v-for="film in films" :key="film.id">
+            <div class="column is-full" v-for="film in films" :key="film.id">
                 <div class="box">
                 <article class="media">
                     <div class="media-left">

@@ -62,7 +62,7 @@ export default {
     .card {
         border-radius: 15px;
         cursor: pointer;
-        height: 100%;
+        height: 150px;
         margin-left: 2%;
         margin-bottom: 2%;
         flex-basis: 15rem;
@@ -76,7 +76,6 @@ export default {
     .add-project {
         height: 100%;
         text-align: center;
-        padding-top: 35%;
     }
     .section {
         padding-top: 3rem;
@@ -90,13 +89,8 @@ export default {
         background-color:	rgb(255, 143, 121);
     }
     .home-columns {
-        width: 100%;
-        height: 280px;
-        position: absolute;
-        top: 218px;
-        left: 0;
-        padding-left: 10%;
-        padding-right: 10%;
+        position: relative;
+        top: -265px;
         flex-wrap: wrap;
         justify-content: flex-start;
     }

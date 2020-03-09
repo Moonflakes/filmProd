@@ -1,13 +1,13 @@
 <template>
 <v-app>
     <div class="content-body">
-      <section class="hero is-warning is-medium">
+      <section class="hero is-warning">
         <div class="hero-head">
           <nav class="navbar">
             <div class="content-nav">
               <div class="navbar-brand">
-                <router-link class="navbar-item" to="/">
-                    <img src="./assets/blou.png" style="width: 50%; max-height: none;">
+                <router-link class="navbar-item home-logo" to="/">
+                    <img src="./assets/blou.png" style="max-height: none;">
                 </router-link>
                     <span class="navbar-burger burger" data-target="navbarMenuHeroB">
                       <span></span>
@@ -17,6 +17,9 @@
                   </div>
                   <div id="navbarMenuHeroB" class="navbar-menu">
                     <div class="navbar-end">
+                      <router-link class="navbar-item" to='/'>
+                        Home
+                      </router-link>
                       <router-link class="navbar-item" to='/films'>
                         Films
                       </router-link>
@@ -79,12 +82,34 @@ export default {
   .navbar .has-shadow {
     box-shadow: 0 0.125rem 0.25rem rgba(0,0,0,.075) !important;
   }
+  .home-logo {
+    width: 155px;
+  }
   .body-section {
-    height: 100%;
     padding-bottom: 0px;
     background-color: whitesmoke;
   }
   .section {
-    padding: 3rem 10rem !important;
+    padding: 3rem 3rem !important;
   }
+  @media screen and (min-width: 769px), print {
+    .section {
+      padding: 3rem 10rem !important;
+    }
+    .home-columns .card {
+      height: 280px !important;
+    }
+    .add-project {
+      padding-top: 35% !important;
+    }
+  }
+  .router-link-exact-active{
+    background-color: #ffdd57 !important;
+    color: #EE4C33 !important;
+  }
+  .hero-body {
+    padding-bottom: 9rem !important;
+    padding-top: 9rem !important;
+  }
+  
 </style>

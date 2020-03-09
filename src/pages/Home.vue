@@ -2,9 +2,9 @@
     <section class="section body-section">
         <div class="is-flex home-columns">
                 <div class="card">
-                    <div class="card-content" @click="isComponentModalActive  = true">
-                        <h1 class="title is-5">Ajouter un projet</h1>
+                    <div class="card-content add-project" @click="isComponentModalActive = true">
                         <h2 class="title is-2">+</h2>
+                        <h1 class="title is-6">Ajouter un projet</h1>
                     </div>
                     <b-modal
                         :active.sync="isComponentModalActive"
@@ -73,6 +73,11 @@ export default {
     }
     :hover.card h1, :hover.card h2, :hover.card h3{
         color: white;
+    }
+    .add-project {
+        height: 100%;
+        text-align: center;
+        padding-top: 35%;
     }
     .section {
         padding-top: 3rem;

@@ -90,11 +90,6 @@ export default {
     .project {
         background-color:	rgb(255, 143, 121);
     }
-    .body-section {
-        height: 100%;
-        padding-bottom: 0px;
-        background-color: whitesmoke;
-    }
     .home-columns {
         width: 100%;
         height: 280px;

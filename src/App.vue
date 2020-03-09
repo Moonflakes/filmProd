@@ -6,24 +6,9 @@
           <nav class="navbar">
             <div class="content-nav">
               <div class="navbar-brand">
-                <a class="navbar-item" href='/'>
-            <!-- <template slot="brand">
-                <b-navbar-item > -->
-                    <img
-                        src="./assets/blou.png" style="width: 50%; max-height: none;"
-                    >
-                </a>
-                <!-- </b-navbar-item>
-            </template> -->
-            <!-- <template slot="start" >
-                <b-navbar-item href='/films'>
-                    Films
-                </b-navbar-item>
-                <b-navbar-item href="/cast">
-                    Cast
-                </b-navbar-item>
-            </template> -->
-            
+                <router-link class="navbar-item" to="/">
+                    <img src="./assets/blou.png" style="width: 50%; max-height: none;">
+                </router-link>
                     <span class="navbar-burger burger" data-target="navbarMenuHeroB">
                       <span></span>
                       <span></span>
@@ -32,30 +17,23 @@
                   </div>
                   <div id="navbarMenuHeroB" class="navbar-menu">
                     <div class="navbar-end">
-                      <a class="navbar-item" href='/films'>
+                      <router-link class="navbar-item" to='/films'>
                         Films
-                      </a>
-                      <a class="navbar-item" href="/cast">
+                      </router-link>
+                      <router-link class="navbar-item" to="/cast">
                         Cast
-                      </a>
+                      </router-link>
                     </div>
                   </div>
                 </div>
           </nav>
         </div>
-        <div class="hero-body">
+        <div class="hero-body" v-if="hiddenContainer">
           <div class="container">
-            <!-- <h1 class="title">
-              Medium title
-            </h1>
-            <h2 class="subtitle">
-              Medium subtitle
-            </h2> -->
           </div>
         </div>
       </section>
       <router-view >
-        <!-- Route content goes here. -->
       </router-view>
       <footer class="footer has-background-warning"></footer>
     </div>
@@ -73,13 +51,21 @@ export default {
   data: () => ({
     //
   }),
+  computed: {
+    hiddenContainer() {
+      console.log(this.$route.path)
+      if (this.$route.path != '/')
+        return false
+      return true
+    }
+  }
 };
 </script>
 <style>
   .content-nav {
     width: 100%;
     display: flex;
-    padding: 15px 15px 0px 15px;
+    padding: 15px;
   }
   .content-body{
     height: 100%;
@@ -93,5 +79,10 @@ export default {
   }
   .navbar .has-shadow {
     box-shadow: 0 0.125rem 0.25rem rgba(0,0,0,.075) !important;
+  }
+  .body-section {
+    height: 100%;
+    padding-bottom: 0px;
+    background-color: whitesmoke;
   }
 </style>

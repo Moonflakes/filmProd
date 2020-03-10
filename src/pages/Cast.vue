@@ -42,6 +42,9 @@
                             </p>
                         </div>
                     </div>
+                    <div class="media-right">
+                        <font-awesome-icon icon="edit" />
+                    </div>
                 </article>
                 </div>
             </div>

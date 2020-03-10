@@ -36,9 +36,7 @@
           </div>
         </div>
       </section>
-      <transition name="router-anime" 
-          enter-active-class="animated fadeInDown" 
-          leave-active-class="animated fadeOutDown">
+      <transition name="view">
         <router-view/>
       </transition>
       <footer class="footer has-background-warning"></footer>
@@ -54,7 +52,7 @@ export default {
   },
 
   data: () => ({
-    //
+    show: true
   }),
   computed: {
     hiddenContainer() {
@@ -90,8 +88,6 @@ export default {
     width: 155px;
   }
   .body-section {
-    position: fixed;
-    width: inherit;
     padding-bottom: 0px;
     background-color: whitesmoke;
     transition: 1s;
@@ -115,7 +111,19 @@ export default {
     color: #EE4C33 !important;
   }
   .hero-body {
-    padding-bottom: 9rem !important;
-    padding-top: 9rem !important;
+    padding-top: 13rem !important;
+  }
+
+  .view-enter-active, .view-leave-active {
+    transition: opacity 0.5s ease-in-out, transform 0.5s ease;
+  }
+  .view-enter-active {
+    transition-delay: 0.5s;
+  }
+  .view-enter, .view-leave-to {
+    opacity: 0;
+  }
+  .view-enter-to, .view-leave {
+    opacity: 1;
   }
 </style>

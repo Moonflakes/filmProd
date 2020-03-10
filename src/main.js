@@ -12,6 +12,16 @@ import Home from "./pages/Home.vue";
 import Cast from "./pages/Cast.vue";
 import Films from "./pages/Films.vue";
 import FilmItem from "./pages/FilmItem.vue";
+import { library } from '@fortawesome/fontawesome-svg-core'
+import { faEdit } from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
+ 
+library.add(faEdit)
+ 
+Vue.component('font-awesome-icon', FontAwesomeIcon)
+ 
+Vue.config.productionTip = false
+
 Vue.use(Buefy)
 
 Vue.use(VueRouter)

@@ -39,11 +39,47 @@
                                 <strong>Films</strong>
                             <br>
                                 <b-table :data="cast.films" :columns="columns"></b-table>
+                            <br>
+                            
                             </p>
+                            <div v-if="castId == cast.id">
+                                <b-field grouped>
+                                    <b-field label="Film"
+                                        label-position='on-border'>
+                                        <b-autocomplete
+                                            v-model="filmAdd"
+                                            placeholder="Search a film"
+                                            :keep-first="true"
+                                            :open-on-focus="true"
+                                            :data="films"
+                                            @select="option => selected = option"
+                                            @change="addFilm">
+                                        </b-autocomplete>
+                                    </b-field>
+                                    <b-field label="Role"
+                                        label-position='on-border'>
+                                        <b-input
+                                            v-model="role"
+                                            :value="role"
+                                            placeholder="Role"
+                                            required>
+                                        </b-input>
+                                    </b-field>
+                                    <a aria-label="add film" @click="addFilmCast(cast.id, filmAdd, role)">
+                                        <font-awesome-icon icon="plus-circle"/>
+                                    </a>
+                                </b-field>
+                            </div>
+                            <div>
+                                <a aria-label="add film" @click="blabla(cast.id)">
+                                    <font-awesome-icon icon="plus-square" /> Add a film
+                                </a>
+                            </div>
                         </div>
                     </div>
+                    
                     <div class="media-right">
-                        <font-awesome-icon icon="edit" />
+                        
                     </div>
                 </article>
                 </div>
@@ -73,11 +109,21 @@ export default {
                         label: 'Role',
                     }
                 ],
-                filmTitle: ''
+                filmTitle: '',
+                filmAdd: '',
+                castId: null,
+                askAddFilm: false
             }
     },
 
     methods: {
+        addFilmCast(castId, filmTitle, role) {
+            this.$store.commit('addFilmCast', castId, filmTitle, role)
+        },
+        blabla(castid) {
+            this.castId = castid 
+            this.askAddFilm = !this.askAddFilm
+        }
     },
 
     computed: {

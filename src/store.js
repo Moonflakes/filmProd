@@ -207,11 +207,22 @@ export const store = new Vuex.Store({
          }
     },
     mutations: {
-        addActor (state, actor) {
-            state.actors.push(actor);
-        },
-        addAvatar (state, avatar) {
-           state.actors.map(actor => actor["avatar"] = avatar)
-        }
+         addFilmCast (state, castId, filmTitle, role) {
+            const actor = state.actors.find(actor => actor.id == castId);
+            const film = state.films.find(film => film.title = filmTitle);
+            const actorFilm = {
+               title: filmTitle,
+               date: film[0].date,
+               role: role
+            }
+            actor.films.push(actorFilm)
+            state.actors.push(actor)
+         },
+         addActor (state, actor) {
+               state.actors.push(actor);
+         },
+         addAvatar (state, avatar) {
+            state.actors.map(actor => actor["avatar"] = avatar)
+         }
     }
 })

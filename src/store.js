@@ -1,18 +1,10 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
-import createPersistedState from 'vuex-persistedstate';
-import Cookies from 'js-cookie';
+// import createPersistedState from 'vuex-persistedstate';
 
 Vue.use(Vuex);
 
 export const store = new Vuex.Store({
-   plugins: [ createPersistedState({
-         storage: {
-            getItem: key => Cookies.get(key),
-            setItem: (key, value) => Cookies.set(key, value, { expires: 3, secure: true }),
-            removeItem: key => Cookies.remove(key)
-          }
-   })],
     state: {
         films: [ 
             {
@@ -203,6 +195,7 @@ export const store = new Vuex.Store({
             }
          ]
     },
+   //  plugins: [ createPersistedState()],
     getters: {
          actorsFirstNames(state) {
             return state.actors.map(actor => actor.firstName)
@@ -217,19 +210,16 @@ export const store = new Vuex.Store({
     },
     mutations: {
          updateCastFilms (state, updatCast) {
-            console.log(updatCast)
             const actor = state.actors.find(actor => actor.id == updatCast.castId);
             const film = state.films.find(film => film.title = updatCast.filmTitle);
-            console.log(film)
             const actorFilm = {
                title: updatCast.filmTitle,
                date: film.date,
                role: updatCast.role
             }
-            console.log(actorFilm)
             actor.films.push(actorFilm)
             state.actors.push(actor)
-            console.log(state.actors)
+            return state
          },
          addActor (state, actor) {
                state.actors.push(actor);

@@ -9,8 +9,7 @@
                 <b-modal
                     :active.sync="isComponentModalActive"
                     :component="ModalForm"
-                    :props="formProps"
-                    :width="700">
+                    has-modal-card full-screen :can-cancel="false">
                 </b-modal>
             </div>
             <div class="card project" v-for="film in films" :key="film.id">
@@ -31,10 +30,6 @@ export default {
     data() {
         return {
             ModalForm,
-            formProps: {
-                email: 'evan@you.com',
-                password: 'testing'
-            },
             isComponentModalActive: false,
         }
     },

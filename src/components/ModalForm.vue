@@ -1,12 +1,10 @@
 <template>
-    <section>
-    <form action="">
-        <div class="modal-card" style="width: auto">
+        <div class="modal-card">
             <header class="modal-card-head">
                 <p class="modal-card-title">Film project</p>
             </header>
             <section class="modal-card-body">
-                <section v-if="show">
+                <section >
                     <h1 class="title">Infos</h1>
                     <b-field label="Title"
                         :label-position='labelPosition'>
@@ -55,13 +53,12 @@
                         </b-input>
                     </b-field>
                 </section>
-
-                <section v-else>
+                <hr>
+                <section >
                     <h1 class="title">Casting</h1>
-                    <b-button
-                            icon-left="plus"
-                            class="is-primary"
-                            @click="addCast" />
+                    <a aria-label="add film" class="is-primary" @click="addCast">
+                        <font-awesome-icon icon="plus-square" /> Add a cast
+                    </a>
                     <section v-for="(cast, index) in casts" :key="cast.id">
                         <div class="cast">
                             <h4 class="subtitle">Actor {{index + 1}}</h4>
@@ -101,31 +98,20 @@
                                         required>
                                     </b-input>
                                 </b-field>
-                                <b-button
-                                    icon-left="minus"
-                                    class="is-primary"
-                                    @click="deleteCast(index)" />
+                                <a aria-label="add film" class="is-primary" @click="deleteCast(index)">
+                                    <font-awesome-icon icon="minus-circle" />
+                                </a>
                             </b-field>
                         </div>
                     </section>
                 </section>
-
-                <hr>
-                <button v-if="show"
-                    class="button is-primary is-right"
-                    @click="show = !show">Next</button>
-                <button v-else
-                    class="button is-primary"
-                    @click="show = !show">Before</button>
                 
             </section>
-            <footer class="modal-card-foot" v-if="!show">
+            <footer class="modal-card-foot">
                 <button class="button" type="button" @click="$parent.close()">Close</button>
                 <button class="button is-primary">Add</button>
             </footer>
         </div>
-    </form>
-    </section>
 </template>
 
 <script>
@@ -142,7 +128,6 @@
                         role: '',
                     }
                 ],
-                show: true,
                 castsNames: [
                     'Philippe Catherine',
                     'Adele Miroux',

@@ -46,7 +46,7 @@
                                     <b-field label="Film"
                                         label-position='on-border'>
                                         <b-autocomplete
-                                            v-model="filmAdd"
+                                            v-model="filmAdd[cast.id]"
                                             placeholder="Search a film"
                                             :keep-first="true"
                                             :open-on-focus="true"
@@ -57,7 +57,7 @@
                                     <b-field label="Role"
                                         label-position='on-border'>
                                         <b-input
-                                            v-model="role"
+                                            v-model="role[cast.id]"
                                             :value="role"
                                             placeholder="Role"
                                             required>
@@ -108,8 +108,8 @@ export default {
                     }
                 ],
                 filmTitle: '',
-                filmAdd: '',
-                role: '',
+                filmAdd: [],
+                role: [],
                 castId: null,
                 askAddFilm: false
             }
@@ -119,8 +119,8 @@ export default {
         updateCastFilms() {
             this.$store.commit('updateCastFilms', {
                 castId: this.castId, 
-                filmTitle: this.filmAdd, 
-                role: this.role
+                filmTitle: this.filmAdd[this.castId], 
+                role: this.role[this.castId]
             })
         },
         filmsCast(filmsCast) {

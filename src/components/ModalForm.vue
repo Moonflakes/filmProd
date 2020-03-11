@@ -4,11 +4,11 @@
                 <p class="modal-card-title">Film project</p>
             </header>
             <section class="modal-card-body">
-                <section >
                     <h1 class="title">Infos</h1>
                     <b-field label="Title"
                         :label-position='labelPosition'>
                         <b-input
+                            :v-model="title"
                             :value="title"
                             placeholder="Title"
                             required>
@@ -18,6 +18,12 @@
                         <b-field label="Status"
                             :label-position='labelPosition'>
                             <b-select placeholder="Select a status">
+                                <!-- <option
+                                    v-for="option in status"
+                                    :value="option.id"
+                                    :key="option.id">
+                                    {{ option.user.first_name }}
+                                </option> -->
                                 <option value="1">In progress</option>
                                 <option value="2">Finish</option>
                                 <option value="3">Deserted</option>
@@ -47,14 +53,13 @@
                     <b-field label="Budget"
                         :label-position='labelPosition'>
                         <b-input
+                            :v-model="budget"
                             :value="budget"
                             placeholder="Budget"
                             required>
                         </b-input>
                     </b-field>
-                </section>
                 <hr>
-                <section >
                     <h1 class="title">Casting</h1>
                     <a aria-label="add film" class="is-primary" @click="addCast">
                         <font-awesome-icon icon="plus-square" /> Add a cast
@@ -84,7 +89,7 @@
                                     :label-position='labelPosition'>
                                     <b-input
                                         v-model="cast.age"
-                                        :value="age"
+                                        :value="cast.age"
                                         placeholder="Age"
                                         required>
                                     </b-input>
@@ -93,7 +98,7 @@
                                     :label-position='labelPosition'>
                                     <b-input
                                         v-model="cast.role"
-                                        :value="role"
+                                        :value="cast.role"
                                         placeholder="Role"
                                         required>
                                     </b-input>
@@ -103,13 +108,12 @@
                                 </a>
                             </b-field>
                         </div>
-                    </section>
                 </section>
                 
             </section>
             <footer class="modal-card-foot">
                 <button class="button" type="button" @click="$parent.close()">Close</button>
-                <button class="button is-primary">Add</button>
+                <button class="button is-primary" type="submit" @click="bibi()">Add</button>
             </footer>
         </div>
 </template>
@@ -133,12 +137,16 @@
                     'Adele Miroux',
                     'Julien Buderon'
                 ],
-                castName: ''
+                castName: '',
+                title: '',
+                budget: null
             }
         },
-        props: ['email', 'password'],
 
         methods: {
+            bibi() {
+                console.log(this.$parent)
+            },
             addCast() {
                 console.log("actors", this.actors)
                 this.casts.push({

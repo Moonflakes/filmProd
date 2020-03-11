@@ -14,8 +14,7 @@
                 :keep-first="true"
                 :open-on-focus="true"
                 :data="films"
-                @select="option => selected = option"
-                @change="filteredActors">
+                @select="option => selected = option">
             </b-autocomplete>
         </b-field>
         </b-field>
@@ -51,9 +50,8 @@
                                             placeholder="Search a film"
                                             :keep-first="true"
                                             :open-on-focus="true"
-                                            :data="films"
-                                            @select="option => selected = option"
-                                            @change="addFilm">
+                                            :data="filmsCast(cast.films)"
+                                            @select="option => selected = option">
                                         </b-autocomplete>
                                     </b-field>
                                     <b-field label="Role"
@@ -65,7 +63,7 @@
                                             required>
                                         </b-input>
                                     </b-field>
-                                    <a aria-label="add film" @click="addFilmCast(cast.id, filmAdd, role)">
+                                    <a aria-label="add film" @click="updateCastFilms()">
                                         <font-awesome-icon icon="plus-circle"/>
                                     </a>
                                 </b-field>
@@ -111,14 +109,24 @@ export default {
                 ],
                 filmTitle: '',
                 filmAdd: '',
+                role: '',
                 castId: null,
                 askAddFilm: false
             }
     },
 
     methods: {
-        addFilmCast(castId, filmTitle, role) {
-            this.$store.commit('addFilmCast', castId, filmTitle, role)
+        updateCastFilms() {
+            this.$store.commit('updateCastFilms', {
+                castId: this.castId, 
+                filmTitle: this.filmAdd, 
+                role: this.role
+            })
+        },
+        filmsCast(filmsCast) {
+            const filmsTitlesCast = filmsCast.map(a => a.title)
+            const filterFilmsCast = this.films.filter(film => filmsTitlesCast.indexOf(film) < 0)
+            return filterFilmsCast
         },
         blabla(castid) {
             this.castId = castid 

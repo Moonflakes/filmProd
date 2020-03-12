@@ -13,10 +13,10 @@ import Cast from "./pages/Cast.vue";
 import Films from "./pages/Films.vue";
 import FilmItem from "./pages/FilmItem.vue";
 import { library } from '@fortawesome/fontawesome-svg-core'
-import { faEdit, faPlusSquare, faPlusCircle, faMinusCircle } from '@fortawesome/free-solid-svg-icons'
+import { faEdit, faPlusSquare, faPlusCircle, faMinusCircle, faCalendarDay } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
  
-library.add(faEdit, faPlusSquare, faPlusCircle, faMinusCircle)
+library.add(faEdit, faPlusSquare, faPlusCircle, faMinusCircle, faCalendarDay)
  
 Vue.component('font-awesome-icon', FontAwesomeIcon)
  

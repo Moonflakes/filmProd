@@ -2,15 +2,17 @@
     <section class="section body-section">
         <div class="is-flex home-columns">
             <div class="card">
-                <div class="card-content add-project" @click="isComponentModalActive = true">
+                <div class="card-content add-project" @click="openInputModal() ">
                     <h2 class="title is-2">+</h2>
                     <h1 class="title is-6">Ajouter un projet</h1>
                 </div>
-                <b-modal
+                <!-- <b-modal
                     :active.sync="isComponentModalActive"
                     :component="ModalForm"
-                    has-modal-card full-screen :can-cancel="false">
-                </b-modal>
+                    has-modal-card 
+                    full-screen 
+                    :can-cancel="false"> 
+                </b-modal>-->
             </div>
             <div class="card project" v-for="film in films" :key="film.id">
                 <div class="card-content" href='/films'>
@@ -29,8 +31,8 @@ export default {
     
     data() {
         return {
-            ModalForm,
-            isComponentModalActive: false,
+            // ModalForm,
+            // isComponentModalActive: false,
         }
     },
     
@@ -40,6 +42,19 @@ export default {
                 parent: this,
                 component: ModalForm
             })
+        },
+        openInputModal() {
+            this.$buefy.modal.open({
+                parent : this,
+                component: ModalForm,
+                hasModalCard: true,
+                fullScreen: true,
+                events: {
+                    'success-response': function(value) {
+                        console.log("value on success",value)
+                    }
+                }
+            });
         }
     },
 

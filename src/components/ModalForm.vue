@@ -9,44 +9,58 @@
                         :label-position='labelPosition'>
                         <b-input
                             :v-model="title"
-                            :value="title"
+                            @input="value => title = value"
                             placeholder="Title"
+                            ref="titleEmpty"
                             required>
                         </b-input>
                     </b-field>
                     <b-field grouped>
                         <b-field label="Status"
                             :label-position='labelPosition'>
-                            <b-select placeholder="Select a status">
+                            <b-select placeholder="Select a status" 
+                                :v-model="status"
+                                @input="value => status = value"
+                                type="is-danger"
+                                ref="statusEmpty"
+                                required>
                                 <!-- <option
                                     v-for="option in status"
                                     :value="option.id"
                                     :key="option.id">
                                     {{ option.user.first_name }}
                                 </option> -->
-                                <option value="1">In progress</option>
-                                <option value="2">Finish</option>
-                                <option value="3">Deserted</option>
+                                <option value="in progress">In progress</option>
+                                <option value="finish">Finish</option>
+                                <option value="deserted">Deserted</option>
                             </b-select>
                         </b-field>
                         <b-field label="Production date"
                             :label-position='labelPosition'>
                             <b-datepicker
-                                ref="datepicker"
+                                :v-model="date"
+                                @input="value => date = value"
+                                ref="dateEmpty"
+                                editable
                                 expanded
-                                placeholder="Select a date">
+                                placeholder="Select a date"
+                                required>
                             </b-datepicker>
                             <b-button
-                                @click="$refs.datepicker.toggle()"
-                                icon-left="calendar-today"
-                                type="is-primary" />
+                                @click="$refs.dateEmpty.toggle()"
+                                type="is-primary">
+                                <font-awesome-icon icon="calendar-day" />
+                            </b-button>
                         </b-field>
                     </b-field>
                     <b-field label="Synopsis"
                         :label-position="labelPosition">
                         <b-input 
+                            :v-model="synopsis"
+                            @input="value => synopsis = value"
                             maxlength="200" 
                             type="textarea"
+                            ref="synopsisEmpty"
                             required>
                         </b-input>
                     </b-field>
@@ -54,8 +68,10 @@
                         :label-position='labelPosition'>
                         <b-input
                             :v-model="budget"
-                            :value="budget"
+                            @input="value => budget = value"
+                            type="number"
                             placeholder="Budget"
+                            ref="budgetEmpty"
                             required>
                         </b-input>
                     </b-field>
@@ -89,6 +105,7 @@
                                     :label-position='labelPosition'>
                                     <b-input
                                         v-model="cast.age"
+                                        type="number"
                                         :value="cast.age"
                                         placeholder="Age"
                                         required>
@@ -139,13 +156,30 @@
                 ],
                 castName: '',
                 title: '',
-                budget: null
+                budget: null,
+                status: '',
+                synopsis: '',
+                date: ''
             }
         },
 
         methods: {
             bibi() {
-                console.log(this.$parent)
+                const titleEmpty = this.$refs.titleEmpty.checkHtml5Validity()
+                const statusEmpty = this.$refs.statusEmpty.checkHtml5Validity()
+                const synopsisEmpty = this.$refs.synopsisEmpty.checkHtml5Validity()
+                const budgetEmpty = this.$refs.budgetEmpty.checkHtml5Validity()
+                const dateEmpty = this.$refs.dateEmpty.checkHtml5Validity()
+                // console.log(this.date.toLocaleString('fr-FR').split(' ')[0])
+                if (titleEmpty && statusEmpty && synopsisEmpty && budgetEmpty && dateEmpty) {
+                    this.$emit('success-response', {
+                        title: this.title,
+                        status: this.status,
+                        synopsis: this.synopsis,
+                        budget: this.budget,
+                        date: this.date.toLocaleString('fr-FR').split(' ')[0]
+                    })
+                }
             },
             addCast() {
                 console.log("actors", this.actors)

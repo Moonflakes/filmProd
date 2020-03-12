@@ -87,11 +87,12 @@
                                 <b-field label="Name"
                                     :label-position='labelPosition'>
                                     <b-autocomplete
-                                        v-model="castName"
+                                        v-model="castName[index]"
                                         ref="autocomplete"
                                         :data="filteredCastsNamesArray"
                                         placeholder="Name"
                                         @select="option => selected = option"
+                                        @input="value => castName[index] = value"
                                         required>
                                         <template slot="footer">
                                             <a @click="showAddName">
@@ -104,9 +105,9 @@
                                 <b-field label="Age"
                                     :label-position='labelPosition'>
                                     <b-input
-                                        v-model="cast.age"
+                                        :v-model="cast.age"
                                         type="number"
-                                        :value="cast.age"
+                                        :value="ifAgeExist(index)"
                                         placeholder="Age"
                                         required>
                                     </b-input>
@@ -149,12 +150,7 @@
                         role: '',
                     }
                 ],
-                castsNames: [
-                    'Philippe Catherine',
-                    'Adele Miroux',
-                    'Julien Buderon'
-                ],
-                castName: '',
+                castName: [],
                 title: '',
                 budget: null,
                 status: '',
@@ -208,22 +204,26 @@
                         this.$refs.autocomplete.setSelected(value)
                     }
                 })
+            },
+            ifAgeExist(index) {
+                const value = this.actors.filter(actor => actor.name == this.castName[index])[0]
+                let age = null
+                if (value)
+                    age = value.age
+                return age
             }
         },
 
         computed: {
             ...mapGetters({
-                actors: 'actorsNames'
+                actors: 'actorsNamesAge'
             }),
 
             filteredCastsNamesArray() {
-                return this.castsNames.filter((option) => {
-                    return option
-                        .toString()
-                        .toLowerCase()
-                        .indexOf(this.castName.toLowerCase()) >= 0
-                })
-            }
+                return this.actors.map(actor => actor.name)
+            },
+
+            
         }
 
     }

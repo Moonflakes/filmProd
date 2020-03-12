@@ -197,8 +197,14 @@ export const store = new Vuex.Store({
     },
    //  plugins: [ createPersistedState()],
     getters: {
-         actorsFirstNames(state) {
-            return state.actors.map(actor => actor.firstName)
+         actorsNamesAge(state) {
+            return state.actors.map(function(actor) {
+               return {
+                  id: actor.id,
+                  name: actor.firstName+ ' ' +actor.lastName, 
+                  age: actor.age
+               }
+            })
          },
          actorsFilms(state) {
             // console.log(state.actors.map(actor => actor.films))

@@ -87,37 +87,37 @@
                                 <b-field label="Firstname"
                                     :label-position='labelPosition'>
                                     <b-autocomplete
-                                        v-model="cast.firstname"
+                                        v-model="cast.firstName"
                                         ref="autocomplete"
                                         :data="filteredCastsNamesArray[0]"
                                         placeholder="Firstname"
-                                        @select="option => selected = option"
-                                        @input="value => cast.firstname = value"
+                                        @input="value => cast.firstName = value"
+                                        @select="option => onfaitquoi(option, 'firstName', ['age', 'lastName'], index)"
                                         required>
                                         <template slot="footer">
                                             <a @click="showAddFirstName(index)">
                                                 <span> Add new... </span>
                                             </a>
                                         </template>
-                                        <template slot="empty">No results for {{cast.firstname}}</template>
+                                        <template slot="empty">No results for {{cast.firstName}}</template>
                                     </b-autocomplete>
                                 </b-field>
                                 <b-field label="Lastname"
                                     :label-position='labelPosition'>
                                     <b-autocomplete
-                                        v-model="cast.lastname"
+                                        v-model="cast.lastName"
                                         ref="autocomplete"
                                         :data="filteredCastsNamesArray[1]"
                                         placeholder="Lastname"
                                         @select="option => selected = option"
-                                        @input="value => cast.lastname = value"
+                                        @input="value => cast.lastName = value"
                                         required>
                                         <template slot="footer">
                                             <a >
                                                 <span> Add new... </span>
                                             </a>
                                         </template>
-                                        <template slot="empty">No results for {{cast.lastname}}</template>
+                                        <template slot="empty">No results for {{cast.astName}}</template>
                                     </b-autocomplete>
                                 </b-field>
                                 <b-field label="Age"
@@ -164,8 +164,8 @@
                 labelPosition: 'on-border',
                 casts: [
                     {
-                        firstname: '',
-                        lastname: '',
+                        firstName: '',
+                        lastName: '',
                         age: '',
                         role: '',
                     }
@@ -179,6 +179,20 @@
         },
 
         methods: {
+            onfaitquoi(option, field, othersFields, index) {
+                const value = this.actors.filter(function(actor) {
+                    console.log(actor[field], this.casts[index][field])
+                    return actor[field] == option
+                }.bind(this))
+                console.log(value, value.length)
+                if (value.length == 1) {
+                    this.casts[index][othersFields[0]] = value[0][othersFields[0]]
+                    this.casts[index][othersFields[1]] = value[0][othersFields[1]]
+                }
+                // else if (value.lenght > 1) {
+                //     filter
+                // }
+            },
             bibi() {
                 const titleEmpty = this.$refs.titleEmpty.checkHtml5Validity()
                 const statusEmpty = this.$refs.statusEmpty.checkHtml5Validity()
@@ -199,8 +213,8 @@
             addCast() {
                 // console.log("actors",s this.actors)
                 this.casts.push({
-                    firstname: '',
-                    lastname: '',
+                    firstName: '',
+                    lastName: '',
                     age: '',
                     role: ''
                 })
@@ -210,12 +224,12 @@
                 this.casts.splice(index, 1)
             },
 
-            showAddFisrtName(index) {
+            showAddFirstName(index) {
                 this.$buefy.dialog.prompt({
                     inputAttrs: {
                         placeholder: 'e.g. Pierre',
                         maxlength: 20,
-                        value: this.casts[index].firstname
+                        value: this.casts[index].firstName
                     },
                     confirmText: 'Add',
                     onConfirm: (value) => {
@@ -225,7 +239,7 @@
                 })
             },
             ifAgeExist(index) {
-                const value = this.actors.filter(actor => actor.firstName == this.casts[index].firstname)[0]
+                const value = this.actors.filter(actor => actor.firstName == this.casts[index].firstName)[0]
                 let age = null
                 if (value)
                     age = value.age
@@ -243,10 +257,7 @@
                 array.push(this.actors.map(actor => actor.firstName))
                 array.push(this.actors.map(actor => actor.lastName))
                 return array
-            },
-
-            
+            }
         }
-
     }
 </script>

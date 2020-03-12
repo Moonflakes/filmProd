@@ -84,22 +84,40 @@
                         <div class="cast">
                             <h4 class="subtitle">Actor {{index + 1}}</h4>
                             <b-field grouped>
-                                <b-field label="Name"
+                                <b-field label="Firstname"
                                     :label-position='labelPosition'>
                                     <b-autocomplete
-                                        v-model="castName[index]"
+                                        v-model="cast.firstname"
                                         ref="autocomplete"
-                                        :data="filteredCastsNamesArray"
-                                        placeholder="Name"
+                                        :data="filteredCastsNamesArray[0]"
+                                        placeholder="Firstname"
                                         @select="option => selected = option"
-                                        @input="value => castName[index] = value"
+                                        @input="value => cast.firstname = value"
                                         required>
                                         <template slot="footer">
-                                            <a @click="showAddName">
+                                            <a @click="showAddFirstName(index)">
                                                 <span> Add new... </span>
                                             </a>
                                         </template>
-                                        <template slot="empty">No results for {{castName}}</template>
+                                        <template slot="empty">No results for {{cast.firstname}}</template>
+                                    </b-autocomplete>
+                                </b-field>
+                                <b-field label="Lastname"
+                                    :label-position='labelPosition'>
+                                    <b-autocomplete
+                                        v-model="cast.lastname"
+                                        ref="autocomplete"
+                                        :data="filteredCastsNamesArray[1]"
+                                        placeholder="Lastname"
+                                        @select="option => selected = option"
+                                        @input="value => cast.lastname = value"
+                                        required>
+                                        <template slot="footer">
+                                            <a >
+                                                <span> Add new... </span>
+                                            </a>
+                                        </template>
+                                        <template slot="empty">No results for {{cast.lastname}}</template>
                                     </b-autocomplete>
                                 </b-field>
                                 <b-field label="Age"
@@ -108,6 +126,7 @@
                                         :v-model="cast.age"
                                         type="number"
                                         :value="ifAgeExist(index)"
+                                        @input="value => cast.age = value"
                                         placeholder="Age"
                                         required>
                                     </b-input>
@@ -145,12 +164,12 @@
                 labelPosition: 'on-border',
                 casts: [
                     {
-                        name: '',
+                        firstname: '',
+                        lastname: '',
                         age: '',
                         role: '',
                     }
                 ],
-                castName: [],
                 title: '',
                 budget: null,
                 status: '',
@@ -166,7 +185,7 @@
                 const synopsisEmpty = this.$refs.synopsisEmpty.checkHtml5Validity()
                 const budgetEmpty = this.$refs.budgetEmpty.checkHtml5Validity()
                 const dateEmpty = this.$refs.dateEmpty.checkHtml5Validity()
-                // console.log(this.date.toLocaleString('fr-FR').split(' ')[0])
+                console.log(this.$refs.autocomplete)
                 if (titleEmpty && statusEmpty && synopsisEmpty && budgetEmpty && dateEmpty) {
                     this.$emit('success-response', {
                         title: this.title,
@@ -178,9 +197,10 @@
                 }
             },
             addCast() {
-                console.log("actors", this.actors)
+                // console.log("actors",s this.actors)
                 this.casts.push({
-                    name: '',
+                    firstname: '',
+                    lastname: '',
                     age: '',
                     role: ''
                 })
@@ -190,23 +210,22 @@
                 this.casts.splice(index, 1)
             },
 
-            showAddName() {
+            showAddFisrtName(index) {
                 this.$buefy.dialog.prompt({
-                    message: `Fruit`,
                     inputAttrs: {
-                        placeholder: 'e.g. Pierre Pierre',
+                        placeholder: 'e.g. Pierre',
                         maxlength: 20,
-                        value: this.castName
+                        value: this.casts[index].firstname
                     },
                     confirmText: 'Add',
                     onConfirm: (value) => {
-                        this.castsNames.push(value)
+                        // this.castsNames.push(value)
                         this.$refs.autocomplete.setSelected(value)
                     }
                 })
             },
             ifAgeExist(index) {
-                const value = this.actors.filter(actor => actor.name == this.castName[index])[0]
+                const value = this.actors.filter(actor => actor.firstName == this.casts[index].firstname)[0]
                 let age = null
                 if (value)
                     age = value.age
@@ -220,7 +239,10 @@
             }),
 
             filteredCastsNamesArray() {
-                return this.actors.map(actor => actor.name)
+                let array = [];
+                array.push(this.actors.map(actor => actor.firstName))
+                array.push(this.actors.map(actor => actor.lastName))
+                return array
             },
 
             

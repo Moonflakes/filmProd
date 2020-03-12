@@ -201,7 +201,8 @@ export const store = new Vuex.Store({
             return state.actors.map(function(actor) {
                return {
                   id: actor.id,
-                  name: actor.firstName+ ' ' +actor.lastName, 
+                  firstName: actor.firstName,
+                  lastName: actor.lastName, 
                   age: actor.age
                }
             })

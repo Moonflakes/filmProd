@@ -84,30 +84,55 @@
                         <div class="cast">
                             <h4 class="subtitle">Actor {{index + 1}}</h4>
                             <b-field grouped>
-                                <b-field label="Fullname"
-                                    :label-position='labelPosition'>
-                                    <b-autocomplete
-                                        v-model="cast.fullName"
-                                        ref="autocomplete"
-                                        :data="filteredCastsArray"
-                                        placeholder="Fullname"
-                                        @input="onFaitqqchla(index)"
-                                        @select="option => selected = option"
-                                        required>
-                                        <template slot="footer">
-                                            <a @click="showAddFirstName(index)">
-                                                <span> Add new... </span>
-                                            </a>
-                                        </template>
-                                        <template slot="empty">No results for {{cast.fullName}}</template>
-                                    </b-autocomplete>
+                                <b-field grouped v-if="!cast.addCastModal">
+                                    <b-field label="Fullname" 
+                                        :label-position='labelPosition'>
+                                        <b-autocomplete
+                                            ref="autocomplete"
+                                            v-model="cast.fullName"
+                                            :data="filteredCastsArray"
+                                            placeholder="Fullname"
+                                            @input="onFaitqqchla(index)"
+                                            @select="option => splitFullname(option, index)"
+                                            required>
+                                            <template slot="empty">No results for {{cast.fullName}}</template>
+                                        </b-autocomplete>
+                                        
+                                    </b-field>
+                                    <a aria-label="add film" class="is-primary" @click="IDontWantAnExistingCast(index)">
+                                        <font-awesome-icon icon="times" />
+                                    </a>
                                 </b-field>
+
+                                <b-field grouped v-if="cast.addCastModal">
+                                    <b-field :label-position='labelPosition' label="Firstname">
+                                        <b-input
+                                            ref="firstName"
+                                            v-model="cast.firstName"
+                                            placeholder="Firstname"
+                                            required>
+                                        </b-input>
+                                    </b-field>
+
+                                    <b-field :label-position='labelPosition' label="Lastname">
+                                        <b-input
+                                            ref="lastName"
+                                            v-model="cast.lastName"
+                                            placeholder="Lastname"
+                                            required>
+                                        </b-input>
+                                    </b-field>
+                                    <a aria-label="add film" class="is-primary" @click="cast.addCastModal = !cast.addCastModal">
+                                        <font-awesome-icon icon="search" />
+                                    </a>
+                                </b-field>
+
                                 <b-field label="Age"
                                     :label-position='labelPosition'>
                                     <b-input
                                         :v-model="cast.age"
                                         type="number"
-                                        :value="ifAgeExist(index)"
+                                        :value="cast.age"
                                         @input="value => cast.age = value"
                                         placeholder="Age"
                                         required>
@@ -146,10 +171,12 @@
                 labelPosition: 'on-border',
                 casts: [
                     {
+                        fullName: '',
                         firstName: '',
                         lastName: '',
                         age: '',
                         role: '',
+                        addCastModal: true
                     }
                 ],
                 title: '',
@@ -157,7 +184,8 @@
                 status: '',
                 synopsis: '',
                 date: '',
-                indexCast: -1
+                indexCast: -1,
+                // addCastModal: true
             }
         },
 
@@ -182,10 +210,12 @@
             addCast() {
                 // console.log("actors",s this.actors)
                 this.casts.push({
+                    fullName: '',
                     firstName: '',
                     lastName: '',
                     age: '',
-                    role: ''
+                    role: '',
+                    addCastModal: true
                 })
             },
 
@@ -193,7 +223,7 @@
                 this.casts.splice(index, 1)
             },
 
-            showAddFirstName(index) {
+            showAddName(index) {
                 this.$buefy.dialog.prompt({
                     inputAttrs: {
                         placeholder: 'e.g. Pierre',
@@ -207,17 +237,26 @@
                     }
                 })
             },
-            ifAgeExist(index) {
-                const value = this.actors.filter(actor => actor.firstName + ' ' + actor.lastName == this.casts[index].fullName)[0]
-                console.log(value)
-                let age = null
-                if (value)
-                    age = value.age
-                return age
-            },
             onFaitqqchla(index) {
-                console.log(index)
                 this.indexCast = index
+            },
+            IDontWantAnExistingCast(index) {
+                console.log(this.$refs.autocomplete[index])
+                this.$refs.autocomplete[index].useHtml5Validation = true
+
+                this.casts[index].addCastModal = !this.casts[index].addCastModal
+            },
+            splitFullname(option, index) {
+                const splitFullname = option.split(' ')
+                this.casts[index].firstName = splitFullname[0]
+                this.casts[index].lastName = splitFullname[1]
+
+                const value = this.actors.filter(actor => actor.firstName + ' ' + actor.lastName == option)[0]
+                console.log(option,value)
+                this.casts[index].age = value.age
+
+
+                this.casts[index].addCastModal = !this.casts[index].addCastModal
             }
         },
 
@@ -230,7 +269,6 @@
                 if (this.indexCast > -1){
                     return this.actors.map(actor => actor.firstName + ' ' + actor.lastName)
                     .filter((option) => {
-                    console.log(this.casts[this.indexCast].fullName)
                     return option.toString().toLowerCase().indexOf(this.casts[this.indexCast].fullName.toLowerCase()) >= 0
                 })
                 }

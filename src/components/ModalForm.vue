@@ -11,7 +11,7 @@
                             :v-model="title"
                             @input="value => title = value"
                             placeholder="Title"
-                            ref="titleEmpty"
+                            ref="title"
                             required>
                         </b-input>
                     </b-field>
@@ -22,7 +22,7 @@
                                 :v-model="status"
                                 @input="value => status = value"
                                 type="is-danger"
-                                ref="statusEmpty"
+                                ref="status"
                                 required>
                                 <!-- <option
                                     v-for="option in status"
@@ -40,7 +40,7 @@
                             <b-datepicker
                                 :v-model="date"
                                 @input="value => date = value"
-                                ref="dateEmpty"
+                                ref="date"
                                 editable
                                 expanded
                                 placeholder="Select a date"
@@ -60,7 +60,7 @@
                             @input="value => synopsis = value"
                             maxlength="200" 
                             type="textarea"
-                            ref="synopsisEmpty"
+                            ref="synopsis"
                             required>
                         </b-input>
                     </b-field>
@@ -71,7 +71,7 @@
                             @input="value => budget = value"
                             type="number"
                             placeholder="Budget"
-                            ref="budgetEmpty"
+                            ref="budget"
                             required>
                         </b-input>
                     </b-field>
@@ -91,7 +91,7 @@
                                             ref="autocomplete"
                                             v-model="cast.fullName"
                                             :data="filteredCastsArray"
-                                            placeholder="Fullname"
+                                            placeholder="Search a cast"
                                             @input="onFaitqqchla(index)"
                                             @select="option => splitFullname(option, index)"
                                             required>
@@ -107,7 +107,7 @@
                                 <b-field grouped v-if="cast.addCastModal">
                                     <b-field :label-position='labelPosition' label="Firstname">
                                         <b-input
-                                            ref="firstName"
+                                            ref="checkValid"
                                             v-model="cast.firstName"
                                             placeholder="Firstname"
                                             required>
@@ -116,7 +116,7 @@
 
                                     <b-field :label-position='labelPosition' label="Lastname">
                                         <b-input
-                                            ref="lastName"
+                                            ref="checkValid"
                                             v-model="cast.lastName"
                                             placeholder="Lastname"
                                             required>
@@ -131,6 +131,7 @@
                                     :label-position='labelPosition'>
                                     <b-input
                                         :v-model="cast.age"
+                                        ref="checkValid"
                                         type="number"
                                         :value="cast.age"
                                         @input="value => cast.age = value"
@@ -141,6 +142,7 @@
                                 <b-field label="Role"
                                     :label-position='labelPosition'>
                                     <b-input
+                                        ref="checkValid"
                                         v-model="cast.role"
                                         :value="cast.role"
                                         placeholder="Role"
@@ -157,7 +159,7 @@
             </section>
             <footer class="modal-card-foot">
                 <button class="button" type="button" @click="$parent.close()">Close</button>
-                <button class="button is-primary" type="submit" @click="bibi()">Add</button>
+                <button class="button is-primary" type="submit" @click="checkValidity()">Add</button>
             </footer>
         </div>
 </template>
@@ -190,22 +192,29 @@
         },
 
         methods: {
-            bibi() {
-                const titleEmpty = this.$refs.titleEmpty.checkHtml5Validity()
-                const statusEmpty = this.$refs.statusEmpty.checkHtml5Validity()
-                const synopsisEmpty = this.$refs.synopsisEmpty.checkHtml5Validity()
-                const budgetEmpty = this.$refs.budgetEmpty.checkHtml5Validity()
-                const dateEmpty = this.$refs.dateEmpty.checkHtml5Validity()
-                console.log(this.$refs.autocomplete)
-                if (titleEmpty && statusEmpty && synopsisEmpty && budgetEmpty && dateEmpty) {
+            checkValidity() {
+                const title = this.$refs.title.checkHtml5Validity()
+                const status = this.$refs.status.checkHtml5Validity()
+                const synopsis = this.$refs.synopsis.checkHtml5Validity()
+                const budget = this.$refs.budget.checkHtml5Validity()
+                const date = this.$refs.date.checkHtml5Validity()
+                let checkUnvalid = true; // eslint-disable-line no-unused-vars
+                // console.log(this.$refs)
+                this.$refs.checkValid.forEach(e => {
+                    if (!e.checkHtml5Validity())
+                        checkUnvalid = false
+                })
+                if (checkUnvalid && title && status && synopsis && budget && date) {
                     this.$emit('success-response', {
                         title: this.title,
                         status: this.status,
                         synopsis: this.synopsis,
                         budget: this.budget,
-                        date: this.date.toLocaleString('fr-FR').split(' ')[0]
+                        date: this.date.toLocaleString('fr-FR').split(' ')[0],
+                        casts: this.casts
                     })
                 }
+                this.$parent.close()
             },
             addCast() {
                 // console.log("actors",s this.actors)

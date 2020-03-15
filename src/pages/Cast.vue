@@ -122,6 +122,7 @@ export default {
                 filmTitle: this.filmAdd[this.castId], 
                 role: this.role[this.castId]
             })
+            console.log(this.$store)
         },
         filmsCast(filmsCast) {
             const filmsTitlesCast = filmsCast.map(a => a.title)

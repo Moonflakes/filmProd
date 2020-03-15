@@ -228,8 +228,55 @@ export const store = new Vuex.Store({
             state.actors.push(actor)
             return state
          },
+         updateFilms (state, newFilmInfos) {
+            console.log(newFilmInfos)
+            const newFilm = {
+               id: state.films.length,
+               title: newFilmInfos.title,
+               date: newFilmInfos.date,
+               synopsis: newFilmInfos.synopsis,
+               status: newFilmInfos.status,
+               budjet: newFilmInfos.budjet
+            }
+            state.films.push(newFilm)
+            newFilmInfos.casts.forEach(cast => {
+               if (cast.id[1] != '+')
+                  state.actors.forEach(actor => {
+                     if (actor.id == cast.id)
+                        actor.films.push({
+                           title: newFilm.title,
+                           date: newFilm.date,
+                           role: cast.role
+                        })
+                  });
+               else {
+                  let result           = '';
+                  let characters       = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+                  let charactersLength = characters.length;
+                  for ( var i = 0; i < 5; i++ ) {
+                     result += characters.charAt(Math.floor(Math.random() * charactersLength));
+                  }
+                  state.actors.push({
+                     id: state.actors.length,
+                     avatar: "https://api.adorable.io/avatars/104/"+result+"@adorable.io.png",
+                     firstName: cast.firstName.charAt(0).toUpperCase() + cast.firstName.slice(1),
+                     lastName: cast.lastName.charAt(0).toUpperCase() + cast.lastName.slice(1),
+                     age: cast.age,
+                     films:[
+                        {
+                           title: newFilm.title,
+                           date: newFilm.date,
+                           role: cast.role
+                        }
+                     ]
+                  })
+               }
+            });
+            console.log(state)
+            return state
+         },
          addActor (state, actor) {
-               state.actors.push(actor);
+            state.actors.push(actor);
          }
     }
 })

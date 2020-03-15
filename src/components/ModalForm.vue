@@ -173,6 +173,7 @@
                 labelPosition: 'on-border',
                 casts: [
                     {
+                        id: '+',
                         fullName: '',
                         firstName: '',
                         lastName: '',
@@ -187,6 +188,7 @@
                 synopsis: '',
                 date: '',
                 indexCast: -1,
+                i: 0
                 // addCastModal: true
             }
         },
@@ -219,6 +221,7 @@
             addCast() {
                 // console.log("actors",s this.actors)
                 this.casts.push({
+                    id: '+'+this.i++,
                     fullName: '',
                     firstName: '',
                     lastName: '',
@@ -263,7 +266,7 @@
                 const value = this.actors.filter(actor => actor.firstName + ' ' + actor.lastName == option)[0]
                 console.log(option,value)
                 this.casts[index].age = value.age
-
+                this.casts[index].id = value.id
 
                 this.casts[index].addCastModal = !this.casts[index].addCastModal
             }

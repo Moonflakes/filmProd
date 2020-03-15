@@ -50,9 +50,10 @@ export default {
                 hasModalCard: true,
                 fullScreen: true,
                 events: {
-                    'success-response': function(value) {
-                        console.log("value on success",value)
-                    }
+                    'success-response': function(newFilm) {
+                        console.log("value on success",newFilm)
+                        this.$store.commit('updateFilms', newFilm)
+                    }.bind(this)
                 }
             });
         }

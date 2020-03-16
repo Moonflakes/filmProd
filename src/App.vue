@@ -9,13 +9,13 @@
                 <router-link class="navbar-item home-logo" to="/">
                     <img src="./assets/blou.png" style="max-height: none;">
                 </router-link>
-                    <span class="navbar-burger burger" data-target="navbarMenuHeroB">
+                    <span class="navbar-burger burger" data-target="navbarMenuHeroB" :class="showBurger ? 'is-active' : ''" @click="showBurger = !showBurger">
                       <span></span>
                       <span></span>
                       <span></span>
                     </span>
                   </div>
-                  <div id="navbarMenuHeroB" class="navbar-menu">
+                  <div id="navbarMenuHeroB" class="navbar-menu" :class="showBurger ? 'is-active' : ''">
                     <div class="navbar-end">
                       <router-link class="navbar-item" to='/'>
                         Home
@@ -52,7 +52,8 @@ export default {
   },
 
   data: () => ({
-    show: true
+    show: true,
+    showBurger: false
   }),
   computed: {
     hiddenContainer() {
@@ -83,6 +84,10 @@ export default {
   }
   .navbar .has-shadow {
     box-shadow: 0 0.125rem 0.25rem rgba(0,0,0,.075) !important;
+  }
+  .navbar-menu.is-active {
+    right: 75px;
+    position: absolute;
   }
   .home-logo {
     width: 155px;

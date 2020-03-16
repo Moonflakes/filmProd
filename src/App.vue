@@ -9,13 +9,17 @@
                 <router-link class="navbar-item home-logo" to="/">
                     <img src="./assets/blou.png" style="max-height: none;">
                 </router-link>
-                    <span class="navbar-burger burger" data-target="navbarMenuHeroB" :class="showBurger ? 'is-active' : ''" @click="showBurger = !showBurger">
+                    <span class="navbar-burger burger" data-target="navbarMenuHeroB" 
+                          :class="showBurger && widthWindow <= 1023 ? 'is-active' : ''" 
+                          @click="showBurger = !showBurger">
                       <span></span>
                       <span></span>
                       <span></span>
                     </span>
                   </div>
-                  <div id="navbarMenuHeroB" class="navbar-menu" :class="showBurger ? 'is-active' : ''">
+                  <div id="navbarMenuHeroB" class="navbar-menu" 
+                        :class="showBurger && widthWindow <= 1023 ? 'is-active' : ''" 
+                        @click="showBurger = !showBurger">
                     <div class="navbar-end">
                       <router-link class="navbar-item" to='/'>
                         Home
@@ -53,8 +57,23 @@ export default {
 
   data: () => ({
     show: true,
-    showBurger: false
+    showBurger: false,
+    widthWindow: 0
   }),
+   mounted() {
+    this.$nextTick(function() {
+      window.addEventListener('resize', this.getWindowWidth);
+
+      //Init
+      this.getWindowWidth()
+    })
+
+  },
+  methods: {
+    getWindowWidth() {
+        this.widthWindow = window.innerWidth;
+    }
+  },
   computed: {
     hiddenContainer() {
       if (this.$route.path != '/')

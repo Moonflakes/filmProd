@@ -229,7 +229,6 @@ export const store = new Vuex.Store({
             return state
          },
          updateFilms (state, newFilmInfos) {
-            console.log(newFilmInfos)
             const newFilm = {
                id: state.films.length,
                title: newFilmInfos.title,
@@ -240,7 +239,7 @@ export const store = new Vuex.Store({
             }
             state.films.push(newFilm)
             newFilmInfos.casts.forEach(cast => {
-               if (cast.id[1] != '+')
+               if (cast.id.toString().charAt(0) != '+')
                   state.actors.forEach(actor => {
                      if (actor.id == cast.id)
                         actor.films.push({
@@ -272,7 +271,6 @@ export const store = new Vuex.Store({
                   })
                }
             });
-            console.log(state)
             return state
          },
          addActor (state, actor) {

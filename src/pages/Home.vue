@@ -6,13 +6,6 @@
                     <h2 class="title is-2">+</h2>
                     <h1 class="title is-6">Ajouter un projet</h1>
                 </div>
-                <!-- <b-modal
-                    :active.sync="isComponentModalActive"
-                    :component="ModalForm"
-                    has-modal-card 
-                    full-screen 
-                    :can-cancel="false"> 
-                </b-modal>-->
             </div>
             <div class="card project" v-for="film in films" :key="film.id">
                 <div class="card-content" href='/films'>
@@ -31,8 +24,6 @@ export default {
     
     data() {
         return {
-            // ModalForm,
-            // isComponentModalActive: false,
         }
     },
     
@@ -51,7 +42,6 @@ export default {
                 fullScreen: true,
                 events: {
                     'success-response': function(newFilm) {
-                        console.log("value on success",newFilm)
                         this.$store.commit('updateFilms', newFilm)
                     }.bind(this)
                 }

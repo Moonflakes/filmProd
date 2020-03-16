@@ -189,7 +189,6 @@
                 date: '',
                 indexCast: -1,
                 i: 0
-                // addCastModal: true
             }
         },
 
@@ -201,7 +200,6 @@
                 const budget = this.$refs.budget.checkHtml5Validity()
                 const date = this.$refs.date.checkHtml5Validity()
                 let checkUnvalid = true; // eslint-disable-line no-unused-vars
-                // console.log(this.$refs)
                 this.$refs.checkValid.forEach(e => {
                     if (!e.checkHtml5Validity())
                         checkUnvalid = false
@@ -219,7 +217,6 @@
                 this.$parent.close()
             },
             addCast() {
-                // console.log("actors",s this.actors)
                 this.casts.push({
                     id: '+'+this.i++,
                     fullName: '',
@@ -244,7 +241,6 @@
                     },
                     confirmText: 'Add',
                     onConfirm: (value) => {
-                        // this.castsNames.push(value)
                         this.$refs.autocomplete.setSelected(value)
                     }
                 })
@@ -253,7 +249,6 @@
                 this.indexCast = index
             },
             IDontWantAnExistingCast(index) {
-                console.log(this.$refs.autocomplete[index])
                 this.$refs.autocomplete[index].useHtml5Validation = true
 
                 this.casts[index].addCastModal = !this.casts[index].addCastModal
@@ -264,7 +259,6 @@
                 this.casts[index].lastName = splitFullname[1]
 
                 const value = this.actors.filter(actor => actor.firstName + ' ' + actor.lastName == option)[0]
-                console.log(option,value)
                 this.casts[index].age = value.age
                 this.casts[index].id = value.id
 

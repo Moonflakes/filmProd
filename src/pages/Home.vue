@@ -7,12 +7,12 @@
                     <h1 class="title is-6">Ajouter un projet</h1>
                 </div>
             </div>
-            <div class="card project" v-for="film in films" :key="film.id">
-                <div class="card-content" href='/films'>
+            <router-link class="card project" v-for="film in films" :key="film.id" :to="{name: 'film', params: {id: film.id}}">
+                <div class="card-content" >
                     <h1 class="title is-5">{{film.title}}</h1>
                     <h3 class="subtitle is-6"><i>{{film.status}}</i></h3>
                 </div>
-            </div>
+            </router-link>
         </div>
     </section>
 </template>

@@ -19,7 +19,7 @@
         </b-field>
         </b-field>
         <div class="columns is-multiline">
-            <div class="column" v-for="cast in casts" :key="cast.id">
+            <div class="column" v-for="(cast, index) in casts" :key="'key'+index">
                 <div class="box">
                 <article class="media">
                     <div class="media-left">
@@ -41,23 +41,27 @@
                             <br>
                             
                             </p>
-                            <div v-if="castId == cast.id">
+                            <div v-if="castIdIsActive == cast.id">
                                 <b-field grouped>
                                     <b-field label="Film"
                                         label-position='on-border'>
                                         <b-autocomplete
-                                            v-model="filmAdd[cast.id]"
+                                            ref="filmTitle"
+                                            v-model="filmAdd"
                                             placeholder="Search a film"
                                             :keep-first="true"
                                             :open-on-focus="true"
-                                            :data="filmsCast(cast.films)"
-                                            @select="option => selected = option">
+                                            :data="filteredNoFilmsArray"
+                                            @select="option => selected = option"
+                                            required>
+                                            <template slot="empty">No results for {{filmAdd}}</template>
                                         </b-autocomplete>
                                     </b-field>
                                     <b-field label="Role"
                                         label-position='on-border'>
                                         <b-input
-                                            v-model="role[cast.id]"
+                                            ref="role"
+                                            v-model="role"
                                             :value="role"
                                             placeholder="Role"
                                             required>
@@ -66,10 +70,13 @@
                                     <a aria-label="add film" @click="updateCastFilms()">
                                         <font-awesome-icon icon="plus-circle"/>
                                     </a>
+                                    <a aria-label="add film" @click="castIdIsActive = -1">
+                                        <font-awesome-icon icon="times"/>
+                                    </a>
                                 </b-field>
                             </div>
                             <div>
-                                <a aria-label="add film" @click="blabla(cast.id)">
+                                <a aria-label="add film" @click="castIdIsActive = cast.id" v-if="addFilm(cast.id)">
                                     <font-awesome-icon icon="plus-square" /> Add a film
                                 </a>
                             </div>
@@ -108,30 +115,38 @@ export default {
                     }
                 ],
                 filmTitle: '',
-                filmAdd: [],
-                role: [],
-                castId: null,
-                askAddFilm: false
+                filmAdd: '',
+                role: '',
+                castIdIsActive: -1
             }
     },
 
     methods: {
         updateCastFilms() {
-            this.$store.commit('updateCastFilms', {
-                castId: this.castId, 
-                filmTitle: this.filmAdd[this.castId], 
-                role: this.role[this.castId]
-            })
-            console.log(this.$store)
+            let title = false
+            const role = this.$refs.role[0].checkHtml5Validity()
+            if (!this.$refs.filmTitle[0].selected) {
+                this.$refs.filmTitle[0].setInvalid()
+                this.$refs.filmTitle[0].statusMessage = "This film does not existe"
+            }
+            else
+                title = true
+            // console.log(this.$refs.filmTitle[0])
+            if (title && role) {
+                this.$store.commit('updateCastFilms', {
+                    castId: this.castIdIsActive, 
+                    filmTitle: this.filmAdd, 
+                    role: this.role
+                })
+                this.filmAdd = ''
+                this.role = ''
+                this.castIdIsActive = -1
+            }
         },
-        filmsCast(filmsCast) {
-            const filmsTitlesCast = filmsCast.map(a => a.title)
-            const filterFilmsCast = this.films.filter(film => filmsTitlesCast.indexOf(film) < 0)
-            return filterFilmsCast
-        },
-        blabla(castid) {
-            this.castId = castid 
-            this.askAddFilm = !this.askAddFilm
+        addFilm(castId) {
+            if (this.castIdIsActive != castId && this.films.length != this.casts[castId].films.length)
+                return true
+            return false
         }
     },
 
@@ -151,11 +166,26 @@ export default {
                         return 1;
                     return 0;
                 }.bind(this));
+            
             return filteredActors
         },
         ...mapGetters({
             films: 'filmsTitles'
         }),
+        filteredNoFilmsArray() {
+            if (this.castIdIsActive > -1) {
+                const filmsCastId = this.casts.filter(cast => cast.id == this.castIdIsActive)[0].films.map(film => film.title)
+                console.log(filmsCastId)
+
+                let noFilmsCast = this.films
+                console.log(noFilmsCast)
+                noFilmsCast = noFilmsCast.filter(film => !filmsCastId.includes(film))
+                console.log(noFilmsCast)
+
+                return noFilmsCast.filter(option => option.toString().toLowerCase().indexOf(this.filmAdd.toLowerCase()) >= 0)
+            }
+            return []
+        }
     }
 };
 </script>

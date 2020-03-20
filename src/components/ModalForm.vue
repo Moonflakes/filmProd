@@ -24,12 +24,6 @@
                                 type="is-danger"
                                 ref="status"
                                 required>
-                                <!-- <option
-                                    v-for="option in status"
-                                    :value="option.id"
-                                    :key="option.id">
-                                    {{ option.user.first_name }}
-                                </option> -->
                                 <option value="in progress">In progress</option>
                                 <option value="finish">Finish</option>
                                 <option value="deserted">Deserted</option>

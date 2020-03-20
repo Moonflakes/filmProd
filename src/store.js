@@ -207,18 +207,18 @@ export const store = new Vuex.Store({
                }
             })
          },
-         actorsFilms(state) {
-            // console.log(state.actors.map(actor => actor.films))
-            return state.actors.map(actor => actor.films)
-         },
          filmsTitles(state) {
+            console.log(state.films)
             return state.films.map(film => film.title)
          }
     },
     mutations: {
          updateCastFilms (state, updatCast) {
             const actor = state.actors.find(actor => actor.id == updatCast.castId);
-            const film = state.films.find(film => film.title = updatCast.filmTitle);
+            // console.log(state.films)
+            let film = state.films
+            film = film.find(film => film.title = updatCast.filmTitle);
+            // console.log(film)
             const actorFilm = {
                title: updatCast.filmTitle,
                date: film.date,
@@ -229,6 +229,7 @@ export const store = new Vuex.Store({
             return state
          },
          updateFilms (state, newFilmInfos) {
+            console.log("je passe la")
             const newFilm = {
                id: state.films.length,
                title: newFilmInfos.title,

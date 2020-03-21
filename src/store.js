@@ -208,17 +208,14 @@ export const store = new Vuex.Store({
             })
          },
          filmsTitles(state) {
-            console.log(state.films)
+            // console.log(state.films)
             return state.films.map(film => film.title)
          }
     },
     mutations: {
          updateCastFilms (state, updatCast) {
             const actor = state.actors.find(actor => actor.id == updatCast.castId);
-            // console.log(state.films)
-            let film = state.films
-            film = film.find(film => film.title = updatCast.filmTitle);
-            // console.log(film)
+            let film = state.films.find(film => film.title == updatCast.filmTitle);
             const actorFilm = {
                title: updatCast.filmTitle,
                date: film.date,

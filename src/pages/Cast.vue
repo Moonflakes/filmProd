@@ -174,15 +174,13 @@ export default {
         }),
         filteredNoFilmsArray() {
             if (this.castIdIsActive > -1) {
-                const filmsCastId = this.casts.filter(cast => cast.id == this.castIdIsActive)[0].films.map(film => film.title)
-                console.log(filmsCastId)
+                const filmsCastId = this.casts.filter(cast => 
+                    cast.id == this.castIdIsActive)[0].films.map(film => film.title)
+                let noFilmsCast = this.films.filter(film => !filmsCastId.includes(film))
 
-                let noFilmsCast = this.films
-                console.log(noFilmsCast)
-                noFilmsCast = noFilmsCast.filter(film => !filmsCastId.includes(film))
-                console.log(noFilmsCast)
-
-                return noFilmsCast.filter(option => option.toString().toLowerCase().indexOf(this.filmAdd.toLowerCase()) >= 0)
+                return noFilmsCast.filter(option => option.toString()
+                            .toLowerCase()
+                            .indexOf(this.filmAdd.toLowerCase()) >= 0)
             }
             return []
         }
